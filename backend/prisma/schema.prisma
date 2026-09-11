@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER   // 1. Khách mua hàng (Mặc định)
+  SELLER     // 2. Người bán hàng (Chủ shop)
+  ADMIN      // 3. Quản trị viên tối cao (Xem toàn bộ doanh thu hệ thống)
+}
+model User{
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  role Role @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
+
+  logs AuditLogs[]  // 1 người dùng- n logs
+  products Product[] //1 người dùng  - n sản phẩm
+}
+model AuditLogs {
+  id String @id @default(uuid())
+  action String 
+  details   String?
+  createdAt DateTime @default(now())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Product{
+  id String @id @default(uuid())
+  name String
+  price Decimal
+  userId String
+  user User @relation(fields :[userId],references:[id],onDelete:Cascade)
+}
