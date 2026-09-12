@@ -1,0 +1,9 @@
+import { Router } from "express";
+import { dependencies } from "../../../../infrastructure/containers/index.container";
+import { productController } from "../../controllers/products.controller";
+export const productRouter = (deps : dependencies)=>{
+    const controller = new productController(deps);
+    const router =  Router();
+    router.get("/",controller.getAll);
+    return router;
+}

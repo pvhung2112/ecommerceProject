@@ -4,28 +4,33 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-enum Role {
-  CUSTOMER   // 1. Khách mua hàng (Mặc định)
-  SELLER     // 2. Người bán hàng (Chủ shop)
-  ADMIN      // 3. Quản trị viên tối cao (Xem toàn bộ doanh thu hệ thống)
+model Role {
+  id String @id @default(uuid())
+  name String @unique
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users User[] // 1 role - n users
 }
 model User{
   id String @id @default(uuid())
   name String
   email String @unique
   password String
-  role Role @default(CUSTOMER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt 
 
+  roleId String
+  role Role @relation(fields: [roleId],references:[id],onDelete:Cascade)
+  
   logs AuditLogs[]  // 1 người dùng- n logs
   products Product[] //1 người dùng  - n sản phẩm
 }
