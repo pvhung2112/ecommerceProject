@@ -1,6 +1,8 @@
 export interface productOutputDto{
-    id: string;
     name: string;
     price: number;
- 
+    user : {
+        id : string,
+        name : string;
+    }
 }

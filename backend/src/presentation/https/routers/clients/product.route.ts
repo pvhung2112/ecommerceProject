@@ -5,5 +5,7 @@ export const productRouter = (deps : dependencies)=>{
     const controller = new productController(deps);
     const router =  Router();
     router.get("/",controller.getAll);
+    router.post("/create",controller.createOne);
+
     return router;
 }

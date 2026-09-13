@@ -1,12 +1,52 @@
 import { IProductRepository } from "../../../application/ports/repositories/iProduct.repository";
+import { productWithUser } from "../../../application/ports/type/product.type";
 import { productEntity } from "../../../domain/entities/product.entity";
+import { productMapper } from "../../mapper/product.mapper";
 import { prisma } from "../prisma.client";
 
 export class productRepository implements IProductRepository{
-    async getAll(): Promise<productEntity[]> {
-        const productTable = await prisma.product.findMany();
+    async getAll(): Promise<productWithUser[]> {
+        const productTable = await prisma.product.findMany({
+            include :{
+                user: {
+                    select: {   
+                        id: true,
+                        name: true
+                    }
+                }
+            }
+        });
+        console.log(productTable)
         return productTable.map((item :any)=>{
-            return new productEntity(item.id, item.name, item.price, item.userId);
+            return {
+                product : productMapper.toDomain(item),
+                user :{
+                    id : item.user.id,
+                    name : item.user.name
+                }
+            }
         })
+    }
+    async createOne(input : productEntity): Promise<productWithUser> {
+       const inputDb = productMapper.toPersistence(input);
+       const created = await prisma.product.create({
+        data: inputDb,
+        include: {
+            user: {
+                select: {   
+                    id: true,
+                    name: true
+                }
+            }
+        }
+        });
+        
+        return {
+        product: productMapper.toDomain(created),
+        user: {
+            id: created.user.id,
+            name: created.user.name
+        }
+        };
     }
 }
