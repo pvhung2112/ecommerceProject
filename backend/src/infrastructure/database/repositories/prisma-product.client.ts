@@ -17,36 +17,63 @@ export class productRepository implements IProductRepository{
             }
         });
         console.log(productTable)
-        return productTable.map((item :any)=>{
+        return productTable.map((item: any) => {
             return {
-                product : productMapper.toDomain(item),
-                user :{
-                    id : item.user.id,
-                    name : item.user.name
-                }
-            }
-        })
-    }
-    async createOne(input : productEntity): Promise<productWithUser> {
-       const inputDb = productMapper.toPersistence(input);
-       const created = await prisma.product.create({
-        data: inputDb,
-        include: {
-            user: {
-                select: {   
-                    id: true,
-                    name: true
-                }
-            }
-        }
+                product: productMapper.toDomain(item),
+                user: {
+                    id: item.user.id,
+                    name: item.user.name
+                },
+                slug: item.slug
+            };
         });
-        
-        return {
-        product: productMapper.toDomain(created),
-        user: {
-            id: created.user.id,
-            name: created.user.name
+    }
+    async getDetail(input: string): Promise<productWithUser | null> {
+        const productTable = await prisma.product.findUnique({
+            where: { id: input },
+            include: {
+                user: {
+                    select: {   
+                        id: true,
+                        name: true
+                    }
+                }
+            }
+        });
+        if (!productTable) {
+            return null;
         }
+
+        return {
+            product: productMapper.toDomain(productTable),
+            user: {
+                id: productTable.user.id,
+                name: productTable.user.name
+            },
+            slug: productTable.slug
+        };
+    }
+    async createOne(input: productEntity): Promise<productWithUser> {
+        const inputDb = productMapper.toPersistence(input);
+        const created = await prisma.product.create({
+            data: inputDb,
+            include: {
+                user: {
+                    select: {   
+                        id: true,
+                        name: true
+                    }
+                }
+            }
+        });
+
+        return {
+            product: productMapper.toDomain(created),
+            user: {
+                id: created.user.id,
+                name: created.user.name
+            },
+            slug: created.slug
         };
     }
 }

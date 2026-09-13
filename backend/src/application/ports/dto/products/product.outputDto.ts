@@ -1,8 +1,9 @@
-export interface productOutputDto{
+export interface productOutputDto {
     name: string;
     price: number;
-    user : {
-        id : string,
-        name : string;
-    }
+    slug?: string | null;
+    user: {
+        id: string;
+        name: string;
+    };
 }

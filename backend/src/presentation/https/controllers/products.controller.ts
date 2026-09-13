@@ -8,6 +8,11 @@ export class productController {
         res.status(200).json(output);
 
     }
+    getDetail = async(req : Request, res : Response)=>{
+         const id = req.params.id as string;
+       const output  = await this.dependencies.product.getDetailProductUsecase.execute(id);
+        res.status(200).json(output);
+    }
     createOne = async(req : Request, res : Response)=>{
         const {name , price, userId}  = req.body;
         const input : productInputDto = {

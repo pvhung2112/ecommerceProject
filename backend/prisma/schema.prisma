@@ -46,6 +46,7 @@ model AuditLogs {
 model Product{
   id String @id @default(uuid())
   name String
+  slug      String?   @unique
   price Decimal
   userId String
   user User @relation(fields :[userId],references:[id],onDelete:Cascade)

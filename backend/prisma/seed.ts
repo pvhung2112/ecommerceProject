@@ -73,16 +73,19 @@ async function main() {
   const products = [
     {
       name: 'MacBook Pro 16 inch M3 Max',
+      slug: 'macbook-pro-16-inch-m3-max',
       price: 3499.00,
       userId: sellerUser.id,
     },
     {
       name: 'iPhone 16 Pro Max 256GB',
+      slug: 'iphone-16-pro-max-256gb',
       price: 1199.00,
       userId: sellerUser.id,
     },
     {
       name: 'Tai nghe Sony WH-1000XM5',
+      slug: 'tai-nghe-sony-wh-1000xm5',
       price: 399.99,
       userId: sellerUser.id,
     },
