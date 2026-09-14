@@ -5,6 +5,9 @@ import { productEntity } from "../../../domain/entities/product.entity";
 export class createOneproductusecase {
   constructor(private iProductRepository: IProductRepository) { }
   async execute(input: productInputDto): Promise<productOutputDto> {
+    if (!input.userId) {
+    throw new Error("Không tìm thấy thông tin người dùng (userId)!");
+}
     const newProduct = new productEntity("", input.name, input.price, input.userId);
     const created = await this.iProductRepository.createOne(newProduct);
 

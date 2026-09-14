@@ -7,6 +7,9 @@ export const productRouter = (deps : dependencies)=>{
     router.get("/", controller.getAll);
     router.get("/:id", controller.getDetail);
     router.post("/create", controller.createOne);
+    router.patch("/edit/:id", controller.editOne);
+    router.patch("/edit-multi", controller.editMulti);
+    router.patch("/delete/:id", controller.deleteOne);
 
     return router;
 }

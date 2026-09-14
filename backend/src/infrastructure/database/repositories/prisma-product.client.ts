@@ -76,4 +76,28 @@ export class productRepository implements IProductRepository{
             slug: created.slug
         };
     }
+    async editOne(input: productEntity): Promise<productWithUser> {
+        const inputDb = productMapper.toPersistence(input);
+        const updated = await prisma.product.update({
+            where: { id: input.getId() },
+            data: inputDb,
+            include: {
+                user: {
+                    select: { id: true, name: true }
+                }
+            }
+        });
+        return {
+            product: productMapper.toDomain(updated),
+            user: {
+                id: updated.user.id,
+                name: updated.user.name
+            },
+            slug: updated.slug
+        };
+    }
+    
+    async deleteOne(intput: productEntity): Promise<void> {
+        
+    }
 }

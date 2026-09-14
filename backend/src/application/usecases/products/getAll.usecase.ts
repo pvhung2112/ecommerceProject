@@ -4,7 +4,7 @@ import { IProductRepository } from "../../ports/repositories/iProduct.repository
 
 export class getAllproductusecase {
 
-    constructor(private iProductRepository: IProductRepository) { }
+    constructor(private iProductRepository: IProductRepository) { } 
     async execute(): Promise<productOutputDto[]> {
         const item = await this.iProductRepository.getAll();
         console.log(item);
