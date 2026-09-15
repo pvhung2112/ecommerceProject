@@ -18,49 +18,93 @@ model Role {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users User[] // 1 role - n users
+  users User[] // 1 role - n user
 }
+
 model User{
   id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt 
+  gmail String @unique
+  status String @default("active")
 
-  roleId String
-  role Role @relation(fields: [roleId],references:[id],onDelete:Cascade)
+  roleId String 
+  role Role @relation(fields:[roleId], references : [id], onDelete: Cascade)
+
+  profile Profile? //1user- 1 profile
+  account Account[] //1user - n account
   
-  logs AuditLogs[]  // 1 user - n logs
-  products Product[] //1 user - n products
 }
-model AuditLogs {
-  id String @id @default(uuid())
-  action String 
-  details   String?
-  createdAt DateTime @default(now())
-  userId String
+
+model Account {
+  id String  @id @default(uuid())
+  provider String  
+  providerAccountId String?
+
+  password String? 
+
+  userId  String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Profile{
+  id String @id @default(uuid())
+
+  fullName String
+  phone String? 
+  address String?
+  gender String?  
+  birthday DateTime? 
+  bio String?  
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
 }
 
 model Product{
   id String @id @default(uuid())
   name String
   slug      String?   @unique
-  price Decimal
+
+
+  thumbnail String?              
+  images String[] @default([]) 
+
+  price  Decimal   
+  originalPrice Decimal?  
+  stock         Int       @default(0) 
+
+  status        String    @default("active")
+
   userId String
   user User @relation(fields :[userId],references:[id],onDelete:Cascade)
+
+  categoryId    String?
+  category      Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull) 
+
+  deleted       Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Category {
   id          String     @id @default(uuid())
   title       String
   slug        String?    @unique
+  description String?   
+  thumbnail   String?
+
   parentId    String?
   parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
   children    Category[] @relation("CategoryHierarchy")
+
+  products    Product[] //tạm 1 category - n product
   status      String     @default("active")
-  description String?
+
   deleted     Boolean    @default(false)
   deletedAt   DateTime?
   createdAt   DateTime   @default(now())

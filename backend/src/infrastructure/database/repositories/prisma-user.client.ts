@@ -7,7 +7,7 @@ export class userRepository implements IUserRepository{
         const userTable = await prisma.user.findMany();
         console.log(userTable);
         return userTable.map((item :any)=>{
-            return new userEntity(item.id, item.name, item.email, item.roleId,item.password, item.createdAt, item.updatedAt);
+            return new userEntity(item.id, item.name, item.email, item.roleId,item.password);
         });
     }
 }

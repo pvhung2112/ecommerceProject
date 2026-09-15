@@ -4,8 +4,7 @@ export class userEntity {
   private email: string;
   private password: string;
   private roleId: string;
-  private createdAt?: Date;
-  private updatedAt?: Date;
+
 
   constructor(
     id: string,
@@ -13,16 +12,12 @@ export class userEntity {
     email: string,
     password: string,
     roleId: string,
-    createdAt?: Date,
-    updatedAt?: Date
   ) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.password = password;
     this.roleId = roleId;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
   }
 
   getId(): string {
@@ -45,13 +40,6 @@ export class userEntity {
     return this.roleId;
   }
 
-  getCreatedAt(): Date | undefined {
-    return this.createdAt;
-  }
-
-  getUpdatedAt(): Date | undefined {
-    return this.updatedAt;
-  }
 
   setName(name: string): void {
     this.name = name;
