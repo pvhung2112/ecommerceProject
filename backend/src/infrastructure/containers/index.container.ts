@@ -1,8 +1,10 @@
-import { IContainerProduct } from "./product.container"
+import { IContainerProduct } from "./product.container";
+import { IContainerCategory } from "./category.container";
 
-export const containerMain = ()=>{
+export const containerMain = () => {
     return {
-       product : IContainerProduct() 
-    }
-}
-export type dependencies = ReturnType<typeof containerMain> 
+       product: IContainerProduct(),
+       category: IContainerCategory()
+    };
+};
+export type dependencies = ReturnType<typeof containerMain>;

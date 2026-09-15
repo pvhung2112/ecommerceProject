@@ -31,8 +31,8 @@ model User{
   roleId String
   role Role @relation(fields: [roleId],references:[id],onDelete:Cascade)
   
-  logs AuditLogs[]  // 1 người dùng- n logs
-  products Product[] //1 người dùng  - n sản phẩm
+  logs AuditLogs[]  // 1 user - n logs
+  products Product[] //1 user - n products
 }
 model AuditLogs {
   id String @id @default(uuid())
@@ -50,4 +50,19 @@ model Product{
   price Decimal
   userId String
   user User @relation(fields :[userId],references:[id],onDelete:Cascade)
+}
+
+model Category {
+  id          String     @id @default(uuid())
+  title       String
+  slug        String?    @unique
+  parentId    String?
+  parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Category[] @relation("CategoryHierarchy")
+  status      String     @default("active")
+  description String?
+  deleted     Boolean    @default(false)
+  deletedAt   DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }

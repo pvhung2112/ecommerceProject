@@ -16,6 +16,7 @@ export class productRepository implements IProductRepository{
                 }
             }
         });
+        //select * from product, user where user.id = product.userid
         console.log(productTable)
         return productTable.map((item: any) => {
             return {
@@ -40,6 +41,7 @@ export class productRepository implements IProductRepository{
                 }
             }
         });
+        //select * from product, user where user.id = product.userid and product.id  = cj đấy
         if (!productTable) {
             return null;
         }
