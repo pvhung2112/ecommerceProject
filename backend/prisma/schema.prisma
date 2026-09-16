@@ -12,101 +12,101 @@ datasource db {
 }
 
 model Role {
-  id String @id @default(uuid())
-  name String @unique
+  id          String   @id @default(uuid())
+  name        String   @unique
   description String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   users User[] // 1 role - n user
 }
 
-model User{
-  id String @id @default(uuid())
-  gmail String @unique
+model User {
+  id     String @id @default(uuid())
+  email  String? @unique
   status String @default("active")
 
-  roleId String 
-  role Role @relation(fields:[roleId], references : [id], onDelete: Cascade)
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   profile Profile? //1user- 1 profile
   account Account[] //1user - n account
-  
+
+  products Product[]
 }
 
 model Account {
-  id String  @id @default(uuid())
-  provider String  
+  id                String  @id @default(uuid())
+  provider          String
   providerAccountId String?
 
-  password String? 
+  password String?
 
-  userId  String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
-model Profile{
+model Profile {
   id String @id @default(uuid())
 
   fullName String
-  phone String? 
-  address String?
-  gender String?  
-  birthday DateTime? 
-  bio String?  
+  phone    String?
+  address  String?
+  gender   String?
+  birthday DateTime?
+  bio      String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   userId String @unique
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Product{
-  id String @id @default(uuid())
+model Product {
+  id   String  @id @default(uuid())
   name String
-  slug      String?   @unique
+  slug String? @unique
 
+  description String?
+  thumbnail String?
+  images    String[] @default([])
 
-  thumbnail String?              
-  images String[] @default([]) 
+  price         Decimal
+  originalPrice Decimal?
+  stock         Int      @default(0)
 
-  price  Decimal   
-  originalPrice Decimal?  
-  stock         Int       @default(0) 
-
-  status        String    @default("active")
+  status String @default("active")
 
   userId String
-  user User @relation(fields :[userId],references:[id],onDelete:Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  categoryId    String?
-  category      Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull) 
+  categoryId String?
+category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
 
-  deleted       Boolean   @default(false)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  deleted   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Category {
-  id          String     @id @default(uuid())
+  id          String  @id @default(uuid())
   title       String
-  slug        String?    @unique
-  description String?   
+  slug        String? @unique
+  description String?
   thumbnail   String?
 
-  parentId    String?
-  parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
-  children    Category[] @relation("CategoryHierarchy")
+  parentId String?
+  parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children Category[] @relation("CategoryHierarchy")
 
-  products    Product[] //tạm 1 category - n product
-  status      String     @default("active")
+  products Product[] //tạm 1 category - n product
+  status   String    @default("active")
 
-  deleted     Boolean    @default(false)
-  deletedAt   DateTime?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  deleted   Boolean   @default(false)
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
