@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { categoryInputDto } from "../../application/dtos/categories/category.inputDto";
-import { ICatalogContainer } from "../../infrastructure/containers/catalog.container";
+import { ICatalogModule } from "../../infrastructure/modules/catalog.module";
 
 export class categoryController {
-    constructor(private dependencies: ICatalogContainer) {}
+    constructor(private dependencies: ICatalogModule) {}
 
     createOne = async (req: Request, res: Response): Promise<void> => {
         try {

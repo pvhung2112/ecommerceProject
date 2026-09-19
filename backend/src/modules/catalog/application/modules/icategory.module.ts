@@ -2,7 +2,7 @@ import { createOneCategoryUsecase } from "../usecases/categories/createOne.useca
 import { getAllCategoriesUsecase } from "../usecases/categories/getAll.usecase";
 import { getDetailCategoryUsecase } from "../usecases/categories/getDetail.usecase";
 
-export interface iCategoriesContainer {
+export interface ICategoryModule {
     createOneCategoryUsecase: createOneCategoryUsecase;
     getAllCategoriesUsecase: getAllCategoriesUsecase;
     getDetailCategoryUsecase: getDetailCategoryUsecase;

@@ -33,8 +33,14 @@ export class profileEntity {
     getUserId(): string { return this.userId; }
     getPhone(): string | undefined { return this.phone; }
     getAddress(): string | undefined { return this.address; }
+    getGender(): string | undefined { return this.gender; }
+    getBirthday(): Date | undefined { return this.birthday; }
+    getBio(): string | undefined { return this.bio; }
 
     setFullName(name: string): void { this.fullName = name; }
-    setPhone(phone: string): void { this.phone = phone; }
-    setAddress(address: string): void { this.address = address; }
+    setPhone(phone?: string): void { this.phone = phone; }
+    setAddress(address?: string): void { this.address = address; }
+    setGender(gender?: string): void { this.gender = gender; }
+    setBirthday(birthday?: Date): void { this.birthday = birthday; }
+    setBio(bio?: string): void { this.bio = bio; }
 }

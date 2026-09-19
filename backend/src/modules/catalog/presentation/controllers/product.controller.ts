@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { productInputDto, productEditdto } from "../../application/dtos/products/product.inputDto";
-import { ICatalogContainer } from "../../infrastructure/containers/catalog.container";
+import { ICatalogModule } from "../../infrastructure/modules/catalog.module";
 
 export class productController {
-    constructor(private dependencies: ICatalogContainer) {}
+    constructor(private dependencies: ICatalogModule) {}
 
     getAll = async (_req: Request, res: Response) => {
         const output = await this.dependencies.product.getAllProductsUsecase.execute();

@@ -6,7 +6,7 @@ export class getAllproductusecase {
 
     async execute(): Promise<productOutputDto[]> {
         const item = await this.iProductRepository.getAll();
-        return item.map((item) => {
+        return item.map((item ) => {
             return {
                 name: item.product.getName(),
                 price: item.product.getPrice(),

@@ -3,9 +3,9 @@ import { ICategoryRepository } from "../../application/ports/repositories/iCateg
 import { createOneCategoryUsecase } from "../../application/usecases/categories/createOne.usecase";
 import { getAllCategoriesUsecase } from "../../application/usecases/categories/getAll.usecase";
 import { getDetailCategoryUsecase } from "../../application/usecases/categories/getDetail.usecase";
-import { iCategoriesContainer } from "../../application/containers/icategories.container";
+import { ICategoryModule } from "../../application/modules/icategory.module";
 
-export const IContainerCategory = (): iCategoriesContainer => {
+export const initCategoryModule = (): ICategoryModule => {
     const repositoryCategory: ICategoryRepository = new categoryRepository();
     return {
         createOneCategoryUsecase: new createOneCategoryUsecase(repositoryCategory),

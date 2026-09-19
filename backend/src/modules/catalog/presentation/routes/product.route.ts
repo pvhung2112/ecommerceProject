@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { ICatalogContainer } from "../../infrastructure/containers/catalog.container";
+import { ICatalogModule } from "../../infrastructure/modules/catalog.module";
 import { productController } from "../controllers/product.controller";
 
-export const productRouter = (deps: ICatalogContainer): Router => {
+export const productRouter = (deps: ICatalogModule): Router => {
     const controller = new productController(deps);
     const router = Router();
 

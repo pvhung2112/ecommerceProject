@@ -2,7 +2,7 @@ import { ICategoryRepository } from "../../application/ports/repositories/iCateg
 import { categoryWithType } from "../../application/types/category.type";
 import { categoryEntity } from "../../domain/entities/category.entity";
 import { categoryMapper } from "../mappers/category.mapper";
-import { prisma } from "../../../../shared/infrastructure/database/prisma.client";
+import { prisma } from "../../../../shared/database/prisma.client";
 
 export class categoryRepository implements ICategoryRepository {
     async createOne(input: categoryEntity): Promise<categoryWithType> {

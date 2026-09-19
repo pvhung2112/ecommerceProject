@@ -1,7 +1,7 @@
 export class roleEntity {
     private readonly id: string;
     private name: string;
-    description?: string;
+    private description?: string;
 
     constructor(id: string, name: string, description?: string) {
         this.id = id;
@@ -20,5 +20,8 @@ export class roleEntity {
     }
     setName(name: string): void {
         this.name = name;
+    }
+    setDescription(description?: string): void {
+        this.description = description;
     }
 }

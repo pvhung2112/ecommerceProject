@@ -4,7 +4,7 @@ import { editMultiproductusecase } from "../usecases/products/editMany.usecase";
 import { editOneproductusecase } from "../usecases/products/editOne.usecase";
 import { getDetailproductusecase } from "../usecases/products/getDetail.usecase";
 
-export interface iProductsContainer {
+export interface IProductModule {
     getAllProductsUsecase: getAllproductusecase;
     createOneProductUsecase: createOneproductusecase;
     getDetailProductUsecase: getDetailproductusecase;

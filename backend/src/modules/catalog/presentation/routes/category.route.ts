@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { ICatalogContainer } from "../../infrastructure/containers/catalog.container";
+import { ICatalogModule } from "../../infrastructure/modules/catalog.module";
 import { categoryController } from "../controllers/category.controller";
 
-export const categoryRouter = (deps: ICatalogContainer): Router => {
+export const categoryRouter = (deps: ICatalogModule): Router => {
     const controller = new categoryController(deps);
     const router = Router();
 
