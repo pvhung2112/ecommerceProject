@@ -19,3 +19,7 @@ npm-debug.log*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Seed files (chứa dữ liệu nhạy cảm, không đẩy lên repo)
+**/prisma/seed.ts
+**/prisma/seed.js
