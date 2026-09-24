@@ -16,6 +16,7 @@ export class profileController {
             res.status(500).json({
                 message: error.message || "Có lỗi xảy ra khi lấy danh sách hồ sơ"
             });
+               
         }
     };
 
