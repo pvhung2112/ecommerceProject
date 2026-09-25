@@ -21,4 +21,8 @@ export interface authOutputDto {
         provider : string;
         userId : string;
     }
+    token? : {
+        accessToken : string
+        refreshToken : string
+    }
 }
