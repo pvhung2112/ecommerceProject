@@ -24,7 +24,7 @@ export class LoginUserByEmail implements ILoginUsecaseUser<loginInputDto,authOut
         const tokenPayload = {
             userId: checkUser.user.getId(),
             email: checkUser.user.getEmail(),
-            role: checkUser.role.getName()
+            roleId: checkUser.role.getId()
         };
         const accessToken = jwtService.signAcessToken(tokenPayload);
         const refreshToken = jwtService.signRefreshToken(tokenPayload);
@@ -52,8 +52,8 @@ export class LoginUserByEmail implements ILoginUsecaseUser<loginInputDto,authOut
                 userId: checkUser.account.getUserId()
             },
             token: {
-                accessToken,
-                refreshToken
+                accessToken : accessToken,
+                refreshToken : refreshToken
             }
         };
 
