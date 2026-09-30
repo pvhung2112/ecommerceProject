@@ -1,0 +1,20 @@
+/* ==========================================================================
+   TÔNG XANH DƯƠNG (BLUE - Công nghệ, Đường dẫn, Thông tin, Tín nhiệm)
+   ========================================================================== */
+:root {
+  --blue-50:  #EFF6FF;         /* Nền thông báo xanh siêu nhẹ */
+  --blue-100: #DBEAFE;
+  --blue-200: #BFDBFE;
+  --blue-300: #93C5FD;
+  --blue-400: #60A5FA;
+  --blue-500: #3B82F6;         /* Xanh dương chuẩn (Nút bấm, Link) */
+  --blue-600: #2563EB;         /* Màu xanh hover */
+  --blue-700: #1D4ED8;
+  --blue-800: #1E40AF;
+  --blue-900: #1E3A8A;         /* Xanh navy đậm */
+
+  /* Biến ngữ cảnh (Semantic) */
+  --info:        var(--blue-500);
+  --info-bg:     var(--blue-50);
+  --link-color:  var(--blue-600);
+}

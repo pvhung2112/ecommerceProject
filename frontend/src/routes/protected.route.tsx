@@ -1,13 +1,12 @@
-import type { ReactNode } from "react";
+
 import { Outlet } from "react-router-dom";
 
 interface ProtectedRouteProps {
     allowedRoles?: string[];
     redirectPath?: string;
-    children?: ReactNode;
 }
 
-export default function ProtectedRoute({ allowedRoles = [], redirectPath = "/login", children }: ProtectedRouteProps) {
+export default function ProtectedRoute({ allowedRoles = [], redirectPath = "/login"}: ProtectedRouteProps) {
     const isAuthenticated = true;
     const userRole = "Cellers";
 
@@ -19,5 +18,5 @@ export default function ProtectedRoute({ allowedRoles = [], redirectPath = "/log
         console.warn(`User role ${userRole} not allowed`);
     }
 
-    return children ? <>{children}</> : <Outlet />;
+    return <Outlet />;
 }

@@ -1,0 +1,17 @@
+/* ==========================================================================
+   TÔNG NÂU THƯƠNG HIỆU (BROWN - Espresso, Mocha, Caramel sang trọng)
+   ========================================================================== */
+:root {
+  --primary-900: #1B0F0A;       /* Espresso đậm nhất - Nền Topbar */
+  --primary-800: #2C1810;       /* Nâu cà phê đậm - Nút bấm chính & Tiêu đề */
+  --primary-700: #3E2419;
+  --primary-600: #5C3827;       /* Nâu hạt dẻ */
+  --primary-500: #7A4C35;       /* Nâu mocha */
+  --primary-400: #9B664B;
+  --primary-300: #BE876B;
+  --primary-200: #DCB49E;
+  --primary-100: #F1DDD1;
+  --primary-50:  #FAF2ED;       /* Nền be nâu siêu nhẹ - Nền Seller, Giỏ hàng */
+
+  --accent-caramel: #B46B38;    /* Nâu caramel điểm nhấn */
+}

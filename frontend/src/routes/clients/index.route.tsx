@@ -1,8 +1,10 @@
 
 import { LoginPage } from "../../pages/clients/auth/login";
+import CellersPage from "../../pages/clients/cellers/cellersPage";
 import HomePage from "../../pages/clients/homePage";
 import CreateProductPage from "../../pages/clients/products/createProductpage";
 import ProductPage from "../../pages/clients/products/productsPage";
+import DashboardLayout from "../../shared/layouts/dashboardLayout";
 import MainLayout from "../../shared/layouts/mainLayout";
 import ProtectedRoute from "../protected.route";
 
@@ -28,19 +30,23 @@ export const clientRouters = [
     },
     //private
     {
-        element : <MainLayout/>,
+        element : <ProtectedRoute allowedRoles={['cellers']} redirectPath="/login"/>,
         children : [
             {
-                path : "/",
-                element : <ProtectedRoute allowedRoles={['Cellers']} redirectPath="/login"/>,
+                path : "/cellers",
+                element : <DashboardLayout/>,
                 children : [
                     {
                         index : true,
-                        element : <CreateProductPage/>
-                    }
+                        element : <CellersPage/>,
+                    },
+                    {
+                        path : "create-product",
+                        element : <CreateProductPage/>,
+                    },
                 ]
             }
-            
         ]
     }
+            
 ]

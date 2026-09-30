@@ -1,0 +1,25 @@
+/* ==========================================================================
+   TÔNG ĐỎ & CAM (RED & ORANGE - Giảm giá, Cảnh báo, Mua ngay, Nút nóng)
+   ========================================================================== */
+:root {
+  /* Thang độ Đỏ (Red Scale) */
+  --red-50:  #FEF2F2;          /* Nền thông báo lỗi nhẹ */
+  --red-100: #FEE2E2;
+  --red-200: #FECACA;
+  --red-300: #FCA5A5;
+  --red-400: #F87171;
+  --red-500: #EF4444;          /* Đỏ chuẩn (Báo lỗi, Xóa) */
+  --red-600: #DC2626;
+  --red-700: #B91C1C;
+  --red-800: #991B1B;
+  --red-900: #7F1D1D;
+
+  /* Màu Cam Đất & Vàng Hổ Phách E-commerce */
+  --badge-sale:         #C2410C; /* Đỏ cam đất thương mại (Sale hot, Nút đăng ký) */
+  --accent-amber:       #D97706; /* Vàng hổ phách (Sao đánh giá 5*, Badge Hot) */
+  --accent-amber-light: #FEF3C7; /* Nền sao đánh giá */
+
+  /* Biến ngữ cảnh (Semantic) */
+  --danger:    var(--red-500);
+  --danger-bg: var(--red-50);
+}
