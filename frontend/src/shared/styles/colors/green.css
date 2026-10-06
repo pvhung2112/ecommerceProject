@@ -2,19 +2,23 @@
    TÔNG XANH LÁ (GREEN - Thành công, Còn hàng, Free Ship, Tiết kiệm)
    ========================================================================== */
 :root {
-  --green-50:  #F0FDF4;        /* Nền thông báo thành công nhẹ */
+  --green-50: #F0FDF4;
+  /* Nền thông báo thành công nhẹ */
   --green-100: #DCFCE7;
   --green-200: #BBF7D0;
   --green-300: #86EFAC;
   --green-400: #4ADE80;
-  --green-500: #22C55E;        /* Xanh lá chuẩn (Thành công, Đã thanh toán) */
+  --green-500: #22C55E;
+  /* Xanh lá chuẩn (Thành công, Đã thanh toán) */
   --green-600: #16A34A;
-  --green-700: #15803D;        /* Xanh lá đậm (Tem còn hàng) */
+  --green-700: #15803D;
+  /* Xanh lá đậm (Tem còn hàng) */
   --green-800: #166534;
   --green-900: #14532D;
 
   /* Biến ngữ cảnh (Semantic) */
-  --success:     var(--green-500);
-  --success-bg:  var(--green-50);
-  --badge-green: var(--green-700); /* Tem Còn hàng / Mới */
+  --success: var(--green-500);
+  --success-bg: var(--green-50);
+  --badge-green: var(--green-700);
+  /* Tem Còn hàng / Mới */
 }

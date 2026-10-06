@@ -4,7 +4,9 @@ import { LoginPage } from "../../pages/admin/auth/login";
 import DashboardLayout from "../../shared/layouts/dashboardLayout";
 import ProtectedRoute from "../protected.route";
 import DashboardPage from "../../pages/admin/dashboardPage";
-import CreateProductPage from "../../pages/clients/products/createProductpage";
+import { adminProductRoutes } from "../../features/product";
+import { adminCategoryRoutes } from "../../features/category";
+
 export const AdminLogin: RouteObject[] = [
     {
        path : `${appConfig.adminPath}/login`,
@@ -20,16 +22,14 @@ export const AdminLogin: RouteObject[] = [
                     {
                         index : true,
                         element : <Navigate to="dashboard" replace />
-                    } ,
+                    },
                     {
                         path : "dashboard",
                         element : <DashboardPage/>
-                    },{
-                        path : "product/create",
-                        element : <CreateProductPage/>
-                    }                   
+                    },
+                    ...adminProductRoutes,
+                    ...adminCategoryRoutes,
                 ]
-
             }
         ]
     }

@@ -1,7 +1,7 @@
-function ProductPage(){
-    return(
+function ProductPage() {
+    return (
         <>
-        <h1>this is product</h1>
+            <h1>this is product</h1>
         </>
     )
 }

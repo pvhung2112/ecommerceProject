@@ -1,0 +1,49 @@
+.header .announcement-bar {
+    background-color: var(--primary-500);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.header .announcement-bar .announcement-text {
+    display: inline-block;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+    animation: marqueetext 12s linear infinite;
+}
+
+@keyframes marqueetext {
+    0% {
+        transform: translateX(100vw);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.header-main .container {
+    display: flex;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.header .header-main .header-brand {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.header .header-main .header-brand .brand-logo {
+    width: 50px;
+    aspect-ratio: 1/1;
+}
+
+.header .header-main .header-brand .brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

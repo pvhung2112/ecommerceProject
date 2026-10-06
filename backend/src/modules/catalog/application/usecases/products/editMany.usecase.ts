@@ -17,6 +17,7 @@ export class editMultiproductusecase {
                 item.setPrice(Number(data.price));
                 const updated = await this.iProductRepository.editOne(item);
                 return {
+                    id: updated.product.getId(),
                     name: updated.product.getName(),
                     price: updated.product.getPrice(),
                     slug: updated.slug,

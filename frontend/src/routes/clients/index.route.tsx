@@ -1,19 +1,19 @@
-
 import { LoginPage } from "../../pages/clients/auth/login";
 import CellersPage from "../../pages/clients/cellers/cellersPage";
 import HomePage from "../../pages/clients/homePage";
-import CreateProductPage from "../../pages/clients/products/createProductpage";
-import ProductPage from "../../pages/clients/products/productsPage";
+import RecruitmentPage from "../../pages/clients/jobs/recruitmentPage";
 import DashboardLayout from "../../shared/layouts/dashboardLayout";
 import MainLayout from "../../shared/layouts/mainLayout";
 import ProtectedRoute from "../protected.route";
+import { clientProductRoutes, sellerProductRoutes } from "../../features/product";
+import { clientCategoryRoutes, sellerCategoryRoutes } from "../../features/category";
 
 export const clientRouters = [
     {
         path : "/login",
         element : <LoginPage/>
     },
-    //public
+    // public 
     {
         path : "/",
         element : <MainLayout/>,
@@ -22,13 +22,15 @@ export const clientRouters = [
                 index : true,
                 element : <HomePage/>
             },
+            ...clientProductRoutes,
+            ...clientCategoryRoutes,
             {
-                path : "/product",
-                element : <ProductPage/>
+                path : "/tuyendung",
+                element : <RecruitmentPage/>
             }
         ]
     },
-    //private
+    // private 
     {
         element : <ProtectedRoute allowedRoles={['cellers']} redirectPath="/login"/>,
         children : [
@@ -40,13 +42,10 @@ export const clientRouters = [
                         index : true,
                         element : <CellersPage/>,
                     },
-                    {
-                        path : "create-product",
-                        element : <CreateProductPage/>,
-                    },
+                    ...sellerProductRoutes,
+                    ...sellerCategoryRoutes,
                 ]
             }
         ]
     }
-            
 ]

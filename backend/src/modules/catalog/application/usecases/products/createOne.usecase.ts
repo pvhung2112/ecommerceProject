@@ -14,6 +14,7 @@ export class createOneproductusecase {
         const created = await this.iProductRepository.createOne(newProduct);
 
         return {
+            id: created.product.getId(),
             name: created.product.getName(),
             price: created.product.getPrice(),
             slug: created.slug,

@@ -1,11 +1,12 @@
 interface propsAnnouncementBar {
-    text?: string
+    text?: string,
+    className?: string
 }
 
-export function AnnouncementBar({ text }: propsAnnouncementBar) {
+export function AnnouncementBar({ text, className }: propsAnnouncementBar) {
     return (
-        <div className="announcement-bar">
-            <div className="announcement-text"> {text}</div>
+        <div className={className}>
+             <span className="announcement-text">{text}</span>
         </div>
     )
 }

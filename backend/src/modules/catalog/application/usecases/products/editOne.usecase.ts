@@ -15,6 +15,7 @@ export class editOneproductusecase {
         product.setPrice(input.price);
         const updatedProduct = await this.iProductRepository.editOne(product);
         return {
+            id: updatedProduct.product.getId(),
             name: updatedProduct.product.getName(),
             price: updatedProduct.product.getPrice(),
             slug: updatedProduct.slug,

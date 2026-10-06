@@ -33,8 +33,13 @@ export class productRepository implements IProductRepository {
     }
 
     async getDetail(input: string): Promise<productWithUser | null> {
-        const productTable = await prisma.product.findUnique({
-            where: { id: input },
+        const productTable = await prisma.product.findFirst({
+            where: {
+                OR: [
+                    { id: input },
+                    { slug: input }
+                ]
+            },
             include: {
                 user: {
                     select: {

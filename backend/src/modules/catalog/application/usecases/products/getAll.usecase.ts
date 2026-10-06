@@ -8,6 +8,7 @@ export class getAllproductusecase {
         const item = await this.iProductRepository.getAll();
         return item.map((item ) => {
             return {
+                id : item.product.getId(),
                 name: item.product.getName(),
                 price: item.product.getPrice(),
                 slug: item.slug,
