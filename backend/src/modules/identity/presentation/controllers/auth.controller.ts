@@ -2,7 +2,7 @@ import { loginInputDto, registerInputDto } from "../../application/dtos/auth/aut
 import { IIdentityModule } from "../../application/modules/iidentity.module";
 import { Request, Response } from "express";
 import { JWT_CONFIG } from "../../../../config/jwt.config";
-import { jwtService } from "../../../../shared/services/jwt.service";
+import { jwtService } from "../../../../shared/services/auth/jwt.service";
 
 export class authController {
     constructor(private dependencies: IIdentityModule) { }

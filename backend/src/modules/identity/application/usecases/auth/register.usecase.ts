@@ -2,21 +2,21 @@ import { registerInputDto } from "../../dtos/auth/auth.inputDto";
 import { authOutputDto } from "../../dtos/auth/auth.outputDto";
 import { IAuthRepository } from "../../ports/repositories/iAuth.repository";
 import { IRoleRepository } from "../../ports/repositories/iRole.repository";
-import { bcryptService } from "../../../../../shared/services/bcrypt.service";
+import { bcryptService } from "../../../../../shared/services/auth/bcrypt.service";
 import { authPayload } from "../../dtos/auth/auth.inputDto";
-export interface IRegisterUsecaseUser<input, output>{
-     execute(input : input) : Promise<output>;
+export interface IRegisterUsecaseUser<input, output> {
+    execute(input: input): Promise<output>;
 }
-export class registerUsecaseUserByEmail implements IRegisterUsecaseUser<registerInputDto,authOutputDto>{
-    constructor(private iAuthrepository : IAuthRepository,
-               private iRoleRepository: IRoleRepository
-    ){
+export class registerUsecaseUserByEmail implements IRegisterUsecaseUser<registerInputDto, authOutputDto> {
+    constructor(private iAuthrepository: IAuthRepository,
+        private iRoleRepository: IRoleRepository
+    ) {
 
-    }     
-    async execute(input : registerInputDto) : Promise<authOutputDto>{
+    }
+    async execute(input: registerInputDto): Promise<authOutputDto> {
         const getRoles = await this.iRoleRepository.getAll();
-        const getRoleCustomer = getRoles.find((item)=>{
-           return item.getName() === "CUSTOMER"
+        const getRoleCustomer = getRoles.find((item) => {
+            return item.getName() === "CUSTOMER"
         })
         const hashedPassword = await bcryptService.hash(input.password);
         const payload: authPayload = {
@@ -52,7 +52,7 @@ export class registerUsecaseUserByEmail implements IRegisterUsecaseUser<register
                 userId: result.account.getUserId()
             }
         };
-    
+
 
 
     }

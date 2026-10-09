@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 // Get a free hosted Postgres database in seconds: `npx create-db`
-
+// bên nào n thì sẽ nhận sẽ có id của thg cần liên kết mối quan hệ
 generator client {
   provider = "prisma-client-js"
 }
@@ -32,7 +32,37 @@ model User {
   profile Profile? //1user- 1 profile
   account Account[] //1user - n account
 
-  products Product[]
+  products Product[] //1user - n product
+
+  conversations Conversation[] //1 user - n conversation
+
+  messages Message[] // 1 user - n message
+}
+model Conversation{
+  id String @id @default(uuid())
+  name String?
+  isGroup     Boolean   @default(false)
+
+  users User[] // 1 conversation - n user
+  messages Message[] // 1 conversation - n message
+  
+  lastMessage String?
+  updatedAt DateTime  @updatedAt 
+  createdAt DateTime  @default(now())
+
+}
+model Message{
+  id String @id @default(uuid())  
+
+  conversationId String
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  senderId String
+  sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  content String
+  status String @default("sent")
+  createdAt DateTime @default(now())
 }
 
 model Account {

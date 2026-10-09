@@ -1,16 +1,16 @@
 import { loginInputDto } from "../../dtos/auth/auth.inputDto";
 import { authOutputDto } from "../../dtos/auth/auth.outputDto";
 import { IAuthRepository } from "../../ports/repositories/iAuth.repository";
-import { bcryptService} from "../../../../../shared/services/bcrypt.service";
-import { jwtService } from "../../../../../shared/services/jwt.service";
-export interface ILoginUsecaseUser<input, output>{
-     execute(input : input) : Promise<output>;
+import { bcryptService } from "../../../../../shared/services/auth/bcrypt.service";
+import { jwtService } from "../../../../../shared/services/auth/jwt.service";
+export interface ILoginUsecaseUser<input, output> {
+    execute(input: input): Promise<output>;
 }
-export class LoginUserByEmail implements ILoginUsecaseUser<loginInputDto,authOutputDto>{
-    constructor(private iAuthrepository : IAuthRepository){}
-    async execute(input : loginInputDto) : Promise<authOutputDto>{
+export class LoginUserByEmail implements ILoginUsecaseUser<loginInputDto, authOutputDto> {
+    constructor(private iAuthrepository: IAuthRepository) { }
+    async execute(input: loginInputDto): Promise<authOutputDto> {
         const checkUser = await this.iAuthrepository.findByEmail(input.email);
-        if(!checkUser){
+        if (!checkUser) {
             throw new Error('User not found');
         }
         const hashedPassword = checkUser.account.getPassword();
@@ -18,7 +18,7 @@ export class LoginUserByEmail implements ILoginUsecaseUser<loginInputDto,authOut
             throw new Error('Tài khoản này chưa cài đặt mật khẩu');
         }
         const checkPassword = await bcryptService.compare(input.password, hashedPassword);
-        if(!checkPassword){
+        if (!checkPassword) {
             throw new Error('Password not match');
         }
         const tokenPayload = {
@@ -52,8 +52,8 @@ export class LoginUserByEmail implements ILoginUsecaseUser<loginInputDto,authOut
                 userId: checkUser.account.getUserId()
             },
             token: {
-                accessToken : accessToken,
-                refreshToken : refreshToken
+                accessToken: accessToken,
+                refreshToken: refreshToken
             }
         };
 

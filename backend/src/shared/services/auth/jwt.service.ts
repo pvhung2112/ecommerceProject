@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { JWT_CONFIG } from "../../config/jwt.config"
+import { JWT_CONFIG } from "../../../config/jwt.config";
 export class jwtService {
     static signAcessToken(payload: any): string {
         return jwt.sign(payload, JWT_CONFIG.ACCESS.SECRET as string, {
