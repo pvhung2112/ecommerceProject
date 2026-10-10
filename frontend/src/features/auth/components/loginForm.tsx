@@ -1,7 +1,12 @@
 import type React from "react";
 import { authService } from "../services/auth.service";
+import { useNavigate } from "react-router-dom"; 
+import { useAuth } from "../hooks/useAuth";
 
 export function LoginForm() {
+  const navigate = useNavigate(); 
+  const auth = useAuth();
+  const login = auth.login;
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -14,9 +19,10 @@ export function LoginForm() {
         email: data.email as string,
         password: data.password as string,
       });
-
       console.log("Backend trả về thành công:", response);
+      login(response.data);
       alert("Đăng nhập thành công!");
+      navigate("/");
 
   };
 

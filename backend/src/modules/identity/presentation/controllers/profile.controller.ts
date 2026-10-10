@@ -56,18 +56,33 @@ export class profileController {
         }
     };
 
-    createOne = async (req: Request, res: Response): Promise<void> => {
+    getMyProfile = async (req: Request, res: Response): Promise<void> => {
+            const userId = (req as any).user?.userId;
+            const output = await this.dependencies.profile.getByUserIdProfileUsecase.execute(userId);
+            
+            res.status(200).json({
+                message: "Lấy thông tin cá nhân thành công",
+                data: output
+            });
+       
+    };
+
+    updateMyProfile = async (req: Request, res: Response): Promise<void> => {
         try {
-            const { userId, fullName, phone, address, gender, birthday, bio } = req.body;
-            if (!userId || !fullName) {
-                res.status(400).json({
-                    message: "userId và fullName là bắt buộc"
-                });
+            const userId = (req as any).user?.userId;
+            if (!userId) {
+                res.status(401).json({ message: "Không tìm thấy thông tin đăng nhập" });
                 return;
             }
 
-            const input: profileInputDto = {
-                userId,
+            const profile = await this.dependencies.profile.getByUserIdProfileUsecase.execute(userId);
+            if (!profile) {
+                res.status(404).json({ message: "Không tìm thấy hồ sơ cá nhân" });
+                return;
+            }
+
+            const { fullName, phone, address, gender, birthday, bio } = req.body;
+            const input: profileUpdateInputDto = {
                 fullName,
                 phone,
                 address,
@@ -76,14 +91,14 @@ export class profileController {
                 bio
             };
 
-            const output = await this.dependencies.profile.createOneProfileUsecase.execute(input);
-            res.status(201).json({
-                message: "Tạo hồ sơ cá nhân thành công",
+            const output = await this.dependencies.profile.updateOneProfileUsecase.execute(input, profile.id);
+            res.status(200).json({
+                message: "Cập nhật hồ sơ cá nhân thành công",
                 data: output
             });
         } catch (error: any) {
             res.status(400).json({
-                message: error.message || "Có lỗi xảy ra khi tạo hồ sơ cá nhân"
+                message: error.message || "Có lỗi xảy ra khi cập nhật hồ sơ cá nhân"
             });
         }
     };

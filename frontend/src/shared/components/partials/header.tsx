@@ -2,7 +2,10 @@ import { AnnouncementBar } from "../announcement/announcementBar";
 import { SearchBar } from "../search/searchBar";
 import { NavLink } from "react-router-dom";
 import "../../styles/partials/header.css";
+import { useAuth } from "../../../features/auth";
 export function Header() {
+    const auth = useAuth();
+    const user = auth.user;
     return (
         <header className="header">
             <AnnouncementBar className="announcement-bar" text="Chào mừng bạn đến với NOVACOM Workspace Gear"/>
@@ -19,11 +22,18 @@ export function Header() {
                     </div>
                     <SearchBar/>
                     <div className="header-account">
-                        <div className="header-nullAccount">
-                            <NavLink to="/login">Đăng nhập</NavLink>
-                            <span>|</span>
-                            <NavLink to="/register">Đăng ký</NavLink>
-                        </div>
+                        {user ? (
+                            <div className="header-user">
+                                <span>Xin chào, {user.profile?.fullName || user.fullName }</span>
+                            </div>
+                        ) : (
+                            <div className="header-nullAccount">
+                                <NavLink to="/login">Đăng nhập</NavLink>
+                                <span>|</span>
+                                <NavLink to="/register">Đăng ký</NavLink>
+                            </div>
+                        )}
+
                     </div>
                 </div>
             </div>
