@@ -10,7 +10,7 @@ export interface AuthContextType {
 }
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-//đây là component authprovider bọc vào 1 component con
+
 export const AuthProvider = (props: AuthProviderProps) => {
     const [user,setUser] = useState();
     const login = (userData : any)=>{
@@ -33,6 +33,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
     };
 
     return (
+        //đây là component authprovider bọc vào 1 component con
         <AuthContext.Provider value={contextValue}>
             {props.children}
         </AuthContext.Provider>

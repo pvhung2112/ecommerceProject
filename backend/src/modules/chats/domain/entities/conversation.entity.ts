@@ -1,30 +1,38 @@
+export interface UserInConversation {
+    id: string;
+    email?: string;
+}
 export class conversationEntity {
     private readonly id: string;
     private name?: string;
     private isGroup: boolean;
     private lastMessage?: string;
     private userIds?: string[];
-    private updatedAt: Date;
     private createdAt: Date;
-
+    private updatedAt: Date;
+    private users?: UserInConversation[];
     constructor(
         id: string,
-        updatedAt: Date,
-        createdAt: Date,
-        lastMessage?: string,
         name?: string,
         isGroup: boolean = false,
-        userIds: string[] = []
+        lastMessage?: string,
+        userIds: string[] = [],
+        users: UserInConversation[] = [],
+        createdAt: Date = new Date(),
+        updatedAt: Date = new Date()
     ) {
         this.id = id;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
-        this.lastMessage = lastMessage;
         this.name = name;
         this.isGroup = isGroup;
+        this.lastMessage = lastMessage;
         this.userIds = userIds;
+        this.users  = users;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
-
+    public getUsers(): UserInConversation[] | undefined {
+        return this.users;
+    }
     public getId(): string {
         return this.id;
     }
@@ -40,11 +48,11 @@ export class conversationEntity {
     public getUserIds(): string[] | undefined {
         return this.userIds;
     }
-    public getUpdatedAt(): Date {
-        return this.updatedAt;
-    }
     public getCreatedAt(): Date {
         return this.createdAt;
+    }
+    public getUpdatedAt(): Date {
+        return this.updatedAt;
     }
 
     public setLastMessage(lastMessage: string): void {
@@ -56,4 +64,5 @@ export class conversationEntity {
     public setUserIds(userIds: string[]): void {
         this.userIds = userIds;
     }
+
 }

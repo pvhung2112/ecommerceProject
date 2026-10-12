@@ -1,11 +1,11 @@
 import {  Router } from "express";
-import { IChatModule } from "../../application/modules/ichat.module";
 import { conversationController } from "../controllers/conversation.controller";
-
+import { IChatModule } from "../../application/modules/ichat.module";
+import { authMiddleware } from "../../../../shared/middlewares/auth.middleware";
 export const conversationRouter = (deps: IChatModule): Router => {
     const controller = new conversationController(deps);
     const router = Router();
-
+    router.post("/create",authMiddleware,controller.createConversation);
     router.get("/", controller.getAll);
     router.get("/:id", controller.getDetail);
 

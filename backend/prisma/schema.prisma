@@ -36,14 +36,14 @@ model User {
 
   conversations Conversation[] //1 user - n conversation
 
-  messages Message[] // 1 user - n message
+  messages Message[] // 1 user - n message 
 }
 model Conversation{
   id String @id @default(uuid())
   name String?
   isGroup     Boolean   @default(false)
 
-  users User[] // 1 conversation - n user
+  users User[] // 1 conversation - n user 
   messages Message[] // 1 conversation - n message
   
   lastMessage String?
