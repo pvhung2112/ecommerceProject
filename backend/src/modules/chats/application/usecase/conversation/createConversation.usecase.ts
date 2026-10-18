@@ -6,18 +6,24 @@ import { conversationOneToOneInputDto } from "../../dtos/conversation/conversati
 export class createConversationUseCase {
     constructor(private iConversationRepository : IConversationRepository){}
     async execute(input : conversationOneToOneInputDto) : Promise<conversationOutputDto> {
-      const newConversationEntity = new conversationEntity("", undefined,false,undefined,[input.senderId, input.receiverId]);
-      const result = await this.iConversationRepository.createConversation(newConversationEntity);
+      let targetConversation = await this.iConversationRepository.findDirectConversation(input.senderId, input.receiverId);
+      if(!targetConversation){
+        const newConversationEntity = new conversationEntity("", undefined,false,undefined,[input.senderId, input.receiverId]);
+        targetConversation = await this.iConversationRepository.createConversation(newConversationEntity);
+      }
+      console.log(targetConversation);
       return {
-        id: result.getId(),
-        name: result.getName() || '',
-        isGroup: result.getIsGroup() || false,
-        lastMessage: result.getLastMessage() || '',
-        userIds: result.getUsers() || [],
-        createdAt: result.getCreatedAt() || new Date(),
-        updatedAt: result.getUpdatedAt() || new Date(),
+        id: targetConversation.conversation.getId(),
+        name: targetConversation.conversation.getName() || "",
+        isGroup: targetConversation.conversation.getIsGroup(),
+        lastMessage: targetConversation.conversation.getLastMessage() || "",
+        users : targetConversation.users.map((u) => ({
+                id: u.getId(),
+                email: u.getEmail(),
+        })),
+        createdAt: targetConversation.conversation.getCreatedAt(),
+        updatedAt: targetConversation.conversation.getUpdatedAt(),
       };
-        
     }
 }
 

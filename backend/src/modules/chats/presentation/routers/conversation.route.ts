@@ -6,8 +6,8 @@ export const conversationRouter = (deps: IChatModule): Router => {
     const controller = new conversationController(deps);
     const router = Router();
     router.post("/create",authMiddleware,controller.createConversation);
-    router.get("/", controller.getAll);
-    router.get("/:id", controller.getDetail);
+    router.get("/", authMiddleware,controller.getAll);
+    router.get("/:id", authMiddleware,controller.getDetail);
 
     return router;
 }

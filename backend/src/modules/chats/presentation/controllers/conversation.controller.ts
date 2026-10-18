@@ -5,9 +5,17 @@ import { conversationOneToOneInputDto } from "../../application/dtos/conversatio
 export class conversationController{
     constructor(private dependencies: IChatModule) {}
     getAll = async (req : Request,res : Response)=>{
+            const getConversationMe = (req as any).user.userId;
+            console.log(getConversationMe);
+            const result = await this.dependencies.conversation.getAllConversation.execute(getConversationMe);
+            return res.status(200).json({
+                message: "lấy thành công danh sách trò chuyện của tôi",
+                data: result
+            })
 
     }
     getDetail = async (req : Request,res : Response)=>{
+        const getConversationDetail = (req as any).user.userId;
         
     }
     createConversation = async (req : Request,res : Response)=>{
@@ -19,7 +27,7 @@ export class conversationController{
         }
         const result = await this.dependencies.conversation.createConversation.execute(input);
         return res.status(201).json({
-            message : "tạo conversationonetoone thành công",
+            message : "tạo conversation one to one thành công",
             data: result
         });
     }

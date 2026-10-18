@@ -26,6 +26,7 @@ export class authRepository implements IAuthRepository {
                     }
                 }
             },
+            
             include: {
                 role: true,
                 account: true,

@@ -4,6 +4,7 @@ export class conversationMapper{
     static toPersistence(conversation : conversationEntity){
         return {
             name:conversation.getName(),
+            //vì db user dưới dạng [User] nên phải map
             users : {
                 connect : conversation.getUserIds()?.map((userid)=>{
                     return {id : userid}
@@ -16,18 +17,14 @@ export class conversationMapper{
         }
     }
     static toDomain(raw: any): conversationEntity {
-        const userIds = raw.users.map((userid : any)=>{
-            return userid.id;
-        })
         return new conversationEntity(
         raw.id,
         raw.name,
         raw.isGroup,
         raw.lastMessage,
-        userIds,
-        raw.users,
+        raw.userIds,
         raw.createdAt,
         raw.updatedAt
-         );
+        );
   }
 }

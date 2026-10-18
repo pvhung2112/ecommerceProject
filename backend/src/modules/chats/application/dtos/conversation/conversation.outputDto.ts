@@ -1,3 +1,5 @@
+import { userEntity } from "../../../../identity/domain/entities/user.entity";
+
 export interface ConversationUserDto {
     id: string;
     email?: string;
@@ -7,7 +9,7 @@ export interface conversationOutputDto {
     name : string;
     isGroup : boolean;
     lastMessage : string;
-    userIds : ConversationUserDto[];
+    users : ConversationUserDto[];
     createdAt : Date;
     updatedAt : Date;
 }

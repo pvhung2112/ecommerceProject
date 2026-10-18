@@ -1,7 +1,7 @@
 import api from "../../../lib/axios";
 import type { LoginPayload, RegisterPayload } from "../types/auth.types";
 
-export const authService = {
+export const authApiService = {
   login: async (payload: LoginPayload) => {
     const response = await api.post("/auth/login", payload);
     return response.data;
@@ -18,4 +18,3 @@ export const authService = {
   },
 };
 
-export default authService;

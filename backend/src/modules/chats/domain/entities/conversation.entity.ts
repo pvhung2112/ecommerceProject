@@ -1,23 +1,18 @@
-export interface UserInConversation {
-    id: string;
-    email?: string;
-}
+
 export class conversationEntity {
-    private readonly id: string;
+    private readonly id: string; 
     private name?: string;
     private isGroup: boolean;
     private lastMessage?: string;
     private userIds?: string[];
     private createdAt: Date;
-    private updatedAt: Date;
-    private users?: UserInConversation[];
+    private updatedAt: Date;    
     constructor(
         id: string,
         name?: string,
         isGroup: boolean = false,
         lastMessage?: string,
         userIds: string[] = [],
-        users: UserInConversation[] = [],
         createdAt: Date = new Date(),
         updatedAt: Date = new Date()
     ) {
@@ -26,13 +21,10 @@ export class conversationEntity {
         this.isGroup = isGroup;
         this.lastMessage = lastMessage;
         this.userIds = userIds;
-        this.users  = users;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-    public getUsers(): UserInConversation[] | undefined {
-        return this.users;
-    }
+   
     public getId(): string {
         return this.id;
     }

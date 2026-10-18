@@ -1,7 +1,7 @@
 import type React from "react";
-import { authService } from "../services/auth.service"; 
+import { authApiService } from "../services/auth.service"; 
 
-export function RegisterForm() {
+function RegisterForm() {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -11,7 +11,7 @@ export function RegisterForm() {
     console.log("Dữ liệu nhập vào:", data);
     
     try {
-      const response = await authService.register({
+      const response = await authApiService.register({
         email: data.email as string,
         password: data.password as string,
         fullName: (data.fullName as string) || "",

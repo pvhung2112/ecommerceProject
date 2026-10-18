@@ -1,5 +1,5 @@
 import type React from "react";
-import { authService } from "../services/auth.service";
+import { authApiService } from "../services/auth.service";
 import { useNavigate } from "react-router-dom"; 
 import { useAuth } from "../hooks/useAuth";
 
@@ -15,7 +15,7 @@ export function LoginForm() {
 
     console.log("Dữ liệu nhập vào:", data);
 
-      const response = await authService.login({
+      const response = await authApiService.login({
         email: data.email as string,
         password: data.password as string,
       });
