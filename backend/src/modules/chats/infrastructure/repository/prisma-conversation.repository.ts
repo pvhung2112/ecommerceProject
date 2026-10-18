@@ -12,14 +12,26 @@ export class conversationRepository implements IConversationRepository {
        const newConversation = await prisma.conversation.create({
             data: inputDb,
             include: {
-                users: true
+                users: {
+                    select : {
+                        id : true,
+                        profile : {
+                        select : {
+                            fullName : true
+                        }
+                    }
+                    }
+                }
             }
         })
         console.log(newConversation);
         return {
             conversation: conversationMapper.toDomain(newConversation),
             users : newConversation.users.map((user)=>{
-                return userMapper.toDomain(user);
+                return {
+                    id : user.id,
+                    name : user.profile?.fullName || `user${user.id}`
+                }
             })
         }
 
@@ -42,14 +54,26 @@ export class conversationRepository implements IConversationRepository {
                 ]
             },
             include : {
-                users : true
+                users: {
+                    select : {
+                        id : true,
+                        profile : {
+                        select : {
+                            fullName : true
+                        }
+                    }
+                    }
+                }
             }
         })
         if(!getConversation) return null;
         else return {
             conversation : conversationMapper.toDomain(getConversation),
             users : getConversation.users.map((user)=>{
-                return userMapper.toDomain(user);
+                return {
+                    id : user.id,
+                    name : user.profile?.fullName || `user${user.id}`
+                }
             })
         }
         
@@ -67,7 +91,16 @@ export class conversationRepository implements IConversationRepository {
                     }
                 },
                 include : {
-                    users : true
+                    users: {
+                    select : {
+                        id : true,
+                        profile : {
+                        select : {
+                            fullName : true
+                        }
+                    }
+                    }
+                }
                 }
             }
         )
@@ -77,9 +110,44 @@ export class conversationRepository implements IConversationRepository {
             return {
                 conversation: conversationMapper.toDomain(conversation),
                 users : conversation.users.map((user)=>{
-                    return userMapper.toDomain(user);
+                    return {
+                    id : user.id,
+                    name : user.profile?.fullName || `user${user.id}`
+                }
                 })
             }
         })
+    }
+    async getDetailConversation(conversationId: string, currentId: string): Promise<conversationWithUsers | null> {
+        const conversation = await prisma.conversation.findFirst({
+            where : {
+                id : conversationId,
+                users : {
+                    some : {id : currentId}
+                }
+            },
+            include : {
+                users: {
+                    select : {
+                        id : true,
+                        profile : {
+                        select : {
+                            fullName : true
+                        }
+                    }
+                    }
+                }
+            }
+        })
+        if(!conversation) return null;
+        else return {
+            conversation : conversationMapper.toDomain(conversation),
+            users : conversation.users.map((user)=>{
+                return {
+                    id : user.id,
+                    name : user.profile?.fullName || `user${user.id}`
+                }
+            })
+        }
     }
 }

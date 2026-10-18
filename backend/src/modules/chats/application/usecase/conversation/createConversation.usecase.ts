@@ -18,8 +18,8 @@ export class createConversationUseCase {
         isGroup: targetConversation.conversation.getIsGroup(),
         lastMessage: targetConversation.conversation.getLastMessage() || "",
         users : targetConversation.users.map((u) => ({
-                id: u.getId(),
-                email: u.getEmail(),
+                id: u.id,
+                name: u.name,
         })),
         createdAt: targetConversation.conversation.getCreatedAt(),
         updatedAt: targetConversation.conversation.getUpdatedAt(),

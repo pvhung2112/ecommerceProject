@@ -1,8 +1,7 @@
-import { userEntity } from "../../../../identity/domain/entities/user.entity";
 
 export interface ConversationUserDto {
     id: string;
-    email?: string;
+    name: string;
 }
 export interface conversationOutputDto {
     id : string;

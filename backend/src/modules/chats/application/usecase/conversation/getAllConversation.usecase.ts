@@ -11,8 +11,8 @@ export class getAllConversationUseCase{
                 isGroup: item.conversation.getIsGroup(),
                 lastMessage: item.conversation.getLastMessage() || "",
                 users : item.users.map((u:any) => ({
-                        id: u.getId(),
-                        email: u.getEmail(),
+                        id: u.id,
+                        name: u.name,
                 })),
                 createdAt: item.conversation.getCreatedAt(),
                 updatedAt: item.conversation.getUpdatedAt(),

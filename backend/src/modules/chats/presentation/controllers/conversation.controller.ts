@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { IChatModule } from "../../application/modules/ichat.module";
-import { conversationOneToOneInputDto } from "../../application/dtos/conversation/conversation.inputDto";
+import { conversationGetDetailInputDto, conversationOneToOneInputDto } from "../../application/dtos/conversation/conversation.inputDto";
 
 export class conversationController{
     constructor(private dependencies: IChatModule) {}
@@ -15,7 +15,22 @@ export class conversationController{
 
     }
     getDetail = async (req : Request,res : Response)=>{
-        const getConversationDetail = (req as any).user.userId;
+
+        const getcurrentId = (req as any).user.userId;
+
+        const { id } = req.params;
+        const input : conversationGetDetailInputDto = {
+            id : id as string,
+            currentId : getcurrentId
+        }
+        
+        const result = await this.dependencies.conversation.getDetailConversation.execute(input);
+
+        return res.status(200).json({
+            message: "lấy thành công danh sách trò chuyện của tôi",
+            data: result
+        })
+
         
     }
     createConversation = async (req : Request,res : Response)=>{
