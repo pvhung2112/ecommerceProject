@@ -7,6 +7,7 @@ function HomePage() {
     const fetchProducts = async () => {
         const res = await productService.getAll();
         setProducts(res.data);
+        console.log(res.data);
     };
 
     useEffect(() => {

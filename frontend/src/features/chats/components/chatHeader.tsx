@@ -1,5 +1,5 @@
 export function ChatHeader(){
     return <>
-        <div></div>
+        <div>đây là thanh chat</div>
     </>
 }

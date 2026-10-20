@@ -7,7 +7,7 @@ import MainLayout from "../../shared/layouts/mainLayout";
 import ProtectedRoute from "../protected.route";
 import { clientProductRoutes, sellerProductRoutes } from "../../features/product";
 import { clientCategoryRoutes, sellerCategoryRoutes } from "../../features/category";
-
+import ChatPage from "../../pages/clients/chats/chatPage";
 export const clientRouters = [
     {
         path : "/login",
@@ -46,6 +46,22 @@ export const clientRouters = [
                     ...sellerCategoryRoutes,
                 ]
             }
+        ]
+    },{
+        element : <ProtectedRoute allowedRoles={['CUSTOMER']} redirectPath="/login"/>,
+        children : [
+            {
+                path : "/",
+                element : <MainLayout/>,
+                children : [
+                    {
+                        path : "/chat",
+                        element : <ChatPage/>
+                    }
+                ]
+            }
+            
+           
         ]
     }
 ]

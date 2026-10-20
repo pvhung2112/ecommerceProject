@@ -35,6 +35,11 @@ export function Header() {
                         )}
 
                     </div>
+                    {user && (
+                         <div className="header-chat">
+                           <NavLink to="/chat">Chat</NavLink>
+                        </div>
+                    )}
                 </div>
             </div>
             <nav className="header-subnav">

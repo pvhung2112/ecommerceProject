@@ -3,7 +3,6 @@ import { conversationEntity } from "../../domain/entities/conversation.entity";
 import { prisma } from "../../../../shared/database/prisma.client";
 import { conversationMapper } from "../mappers/conversation.mapper";
 import { conversationWithUsers } from "../../application/types/conversation.type";
-import { userMapper } from "../../../identity/infrastructure/mappers/user.mapper";
 
 export class conversationRepository implements IConversationRepository {
     async createConversation(conversation: conversationEntity): Promise<conversationWithUsers> {
