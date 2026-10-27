@@ -18,7 +18,8 @@ export class sendMessageUseCase {
             sender: {
                 id: result.sender.id,
                 name: result.sender.name
+            },
+            receiverIds: result.receiverIds
         }
-      }
     }
 }

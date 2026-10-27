@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { productService, ProductList, type Product } from "../../features/product";
-
+// import socket from "../../lib/socket";
 function HomePage() {
     const [products, setProducts] = useState<Product[]>([]);
 
@@ -13,7 +13,18 @@ function HomePage() {
     useEffect(() => {
         fetchProducts();
     }, []);
-
+    
+// useEffect(() => {
+    
+//     socket.on("welcome", (data) => {
+//         console.log(data.yourSocketId);
+//         socket.emit("travedulieu",data)
+       
+//     });
+//     return () => {
+//         socket.off("welcome");
+//     };
+// }, []);
     return (
     <>
      <ProductList products={products} />

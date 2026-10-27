@@ -17,8 +17,18 @@ export class messageRepository implements IMessageRepository {
                                 fullName: true
                             }
                         }
+                    },
+                  
+                },
+                conversation: {
+                        select: {
+                            users : {
+                                select : {
+                                    id : true
+                                }
+                            }
+                        }
                     }
-                }
             }
         })
         return {
@@ -26,7 +36,8 @@ export class messageRepository implements IMessageRepository {
             sender: {
                 id: saveMessage.sender.id,
                 name: saveMessage.sender.profile?.fullName || `user${saveMessage.sender.id}`
-            }
+            },
+            receiverIds: saveMessage.conversation.users.filter((user) => user.id !== saveMessage.senderId).map((user) => user.id)
         }
     }
     async getMessagesByConversationId(conversationId: string,currentId: string): Promise<messageWithUsers[]> {

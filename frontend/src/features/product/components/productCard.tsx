@@ -14,6 +14,7 @@ export function ProductCard({ data }: ProductCardProps) {
         const createChat = await chatAPiService.createConversation(receriverId)
         console.log(createChat.data.id)
         navigate("/chat", { state: { conversationId: createChat.data.id } });
+        
     }
 
     return (

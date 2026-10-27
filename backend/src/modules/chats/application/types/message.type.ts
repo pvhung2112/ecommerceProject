@@ -5,5 +5,6 @@ export interface messageWithUsers {
     sender: {
         id: string;
         name: string;
-    };             
-}
+    };
+    receiverIds?: string[]
+}             

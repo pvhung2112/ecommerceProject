@@ -10,4 +10,5 @@ export interface messageOutputDto {
     status: string;
     createdAt: Date;
     sender : messageUserDto;
+    receiverIds?: string[];
 }
