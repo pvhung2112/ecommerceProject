@@ -25,6 +25,16 @@ export function AuthLayout() {
                 "Tích điểm đổi quà sau mỗi lần mua hàng"
             ]
         };
+    } else if (pathname === "/seller/login") {
+        bannerData = {
+            subTitle: "KÊNH NGƯỜI BÁN",
+            title: "Đăng nhập Kênh Người Bán",
+            benefits: [
+                "Quản lý đơn hàng và doanh thu thời gian thực",
+                "Hệ thống Chat Realtime chăm sóc khách hàng tức thì",
+                "Đồng bộ kho hàng và tối ưu chiến dịch Flash Sale"
+            ]
+        };
     } else if (pathname === "/seller/register") {
         bannerData = {
             subTitle: "NOVACOM Việt Nam",

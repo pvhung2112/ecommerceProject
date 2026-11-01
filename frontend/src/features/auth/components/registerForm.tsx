@@ -1,16 +1,20 @@
 import type React from "react";
 import { authApiService } from "../services/auth.service"; 
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 export function RegisterForm() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+
+  const isSeller = location.pathname.includes("/seller");
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-
+ 
       const response = await authApiService.register({
         email: data.email as string,
         password: data.password as string,
@@ -18,7 +22,9 @@ export function RegisterForm() {
 
       console.log(response);
       alert("Đăng ký thành công");
-      navigate("/login");
+
+      navigate(isSeller ? "/seller/login" : "/login");
+  
   };
 
   return (
@@ -49,9 +55,12 @@ export function RegisterForm() {
 
       <div className="form-footer">
         <span>Đã có tài khoản? </span>
-        <Link to="/login" className="form-link">Đăng nhập</Link>
+        <Link to={isSeller ? "/seller/login" : "/login"} className="form-link">
+        Đăng nhập
+        </Link>
       </div>
     </div>
   );
 }
+
 

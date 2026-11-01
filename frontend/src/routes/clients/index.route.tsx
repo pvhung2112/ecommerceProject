@@ -10,7 +10,8 @@ import ChatPage from "../../pages/clients/chats/chatPage";
 import { AuthLayout } from "../../shared/layouts/authLayout";
 import { LoginPage } from "../../pages/clients/auth/login";
 import { RegisterPage } from "../../pages/clients/auth/register";
-import {RegisterSellerPage} from "../../pages/clients/auth/registerSeller";
+import { RegisterSellerPage } from "../../pages/clients/auth/registerSeller";
+import { LoginSellerPage } from "../../pages/clients/auth/loginSeller";
 
 export const clientRouters = [
     //login và đăng kí
@@ -19,6 +20,7 @@ export const clientRouters = [
     children: [
         { path: "/login", element: <LoginPage /> },
         { path: "/register", element: <RegisterPage /> },
+        { path: "/seller/login", element: <LoginSellerPage /> },
         { path: "/seller/register", element: <RegisterSellerPage /> }
     ]
     },
