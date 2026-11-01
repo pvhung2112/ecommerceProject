@@ -1,10 +1,8 @@
 import { RegisterForm } from "../../../features/auth";
-function registerPage(){
+export function RegisterPage(){
     return(
         <>
         <RegisterForm />
         </>
     )
 }
-
-export default registerPage;

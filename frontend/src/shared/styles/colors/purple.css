@@ -1,0 +1,30 @@
+/* ==========================================================================
+   TÔNG TÍM & INDIGO (PURPLE & VIOLET - Trí tuệ nhân tạo AI, Độc quyền, VIP)
+   ========================================================================== */
+:root {
+  --purple-50:  #FAF5FF;         /* Nền tím siêu nhạt */
+  --purple-100: #F3E8FF;
+  --purple-200: #E9D5FF;
+  --purple-300: #D8B4FE;
+  --purple-400: #C084FC;
+  --purple-500: #A855F7;         /* Tím chuẩn hiện đại */
+  --purple-600: #9333EA;         /* Tím hover */
+  --purple-700: #7E22CE;
+  --purple-800: #6B21A8;
+  --purple-900: #581C87;         /* Tím than đậm */
+  --purple-950: #3B0764;
+
+  /* Tông Indigo (Xanh tím công nghệ kiểu Discord, Stripe) */
+  --indigo-50:  #EEF2FF;
+  --indigo-100: #E0E7FF;
+  --indigo-500: #6366F1;
+  --indigo-600: #4F46E5;
+  --indigo-700: #4338CA;
+
+  /* Biến ngữ cảnh (Semantic) */
+  --badge-vip:       var(--purple-600);
+  --badge-vip-bg:    var(--purple-50);
+  --ai-glow:         var(--indigo-500);
+  --tag-featured:    var(--purple-700);
+}
+

@@ -1,0 +1,26 @@
+/* ==========================================================================
+   TÔNG XANH NGỌC & CYAN (TEAL & EMERALD - Công nghệ tương lai, Fintech, Mát mẻ)
+   ========================================================================== */
+:root {
+  --teal-50:  #F0FDFA;
+  --teal-100: #CCFBF1;
+  --teal-200: #99F6E4;
+  --teal-300: #5EEAD4;
+  --teal-400: #2DD4BF;
+  --teal-500: #14B8A6;         /* Xanh ngọc chuẩn */
+  --teal-600: #0D9488;
+  --teal-700: #0F766E;
+  --teal-800: #115E59;
+  --teal-900: #134E4A;
+
+  /* Tông Cyan (Xanh lam băng tuyết / Neon) */
+  --cyan-50:  #ECFEFF;
+  --cyan-400: #22D3EE;
+  --cyan-500: #06B6D4;
+  --cyan-600: #0891B2;
+
+  /* Biến ngữ cảnh (Semantic) */
+  --accent-teal: var(--teal-500);
+  --teal-subtle: var(--teal-50);
+}
+

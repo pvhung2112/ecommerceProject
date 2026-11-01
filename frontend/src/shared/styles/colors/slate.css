@@ -1,0 +1,22 @@
+/* ==========================================================================
+   TÔNG SLATE (XÁM ÁNH XANH HIỆN ĐẠI - Chuẩn Dark Mode của Tailwind/Vercel)
+   ========================================================================== */
+:root {
+  --slate-50:  #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-400: #94A3B8;
+  --slate-500: #64748B;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1E293B;         /* Nền Dark Mode thẻ / Navbar */
+  --slate-900: #0F172A;         /* Nền Dark Mode chính siêu sâu */
+  --slate-950: #020617;
+
+  /* Biến ngữ cảnh (Semantic) */
+  --slate-border: var(--slate-200);
+  --slate-dark-bg: var(--slate-900);
+  --slate-dark-card: var(--slate-800);
+}
+

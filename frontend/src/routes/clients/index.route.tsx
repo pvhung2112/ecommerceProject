@@ -1,4 +1,3 @@
-import { LoginPage } from "../../pages/clients/auth/login";
 import CellersPage from "../../pages/clients/cellers/cellersPage";
 import HomePage from "../../pages/clients/homePage";
 import RecruitmentPage from "../../pages/clients/jobs/recruitmentPage";
@@ -8,10 +7,20 @@ import ProtectedRoute from "../protected.route";
 import { clientProductRoutes, sellerProductRoutes } from "../../features/product";
 import { clientCategoryRoutes, sellerCategoryRoutes } from "../../features/category";
 import ChatPage from "../../pages/clients/chats/chatPage";
+import { AuthLayout } from "../../shared/layouts/authLayout";
+import { LoginPage } from "../../pages/clients/auth/login";
+import { RegisterPage } from "../../pages/clients/auth/register";
+import {RegisterSellerPage} from "../../pages/clients/auth/registerSeller";
+
 export const clientRouters = [
-    {
-        path : "/login",
-        element : <LoginPage/>
+    //login và đăng kí
+   {
+    element: <AuthLayout />,
+    children: [
+        { path: "/login", element: <LoginPage /> },
+        { path: "/register", element: <RegisterPage /> },
+        { path: "/seller/register", element: <RegisterSellerPage /> }
+    ]
     },
     // public 
     {

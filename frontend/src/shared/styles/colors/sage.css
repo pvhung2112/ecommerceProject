@@ -1,0 +1,19 @@
+/* ==========================================================================
+   TÔNG XANH XÔ THƠM & MATCHA (SAGE & OLIVE - Cặp đôi hoàn hảo với Nâu Gỗ)
+   Cực kỳ dịu mắt, thư giãn, phong cách Workspace công thái học
+   ========================================================================== */
+:root {
+  --sage-50:  #F4F7F5;          /* Nền be xanh siêu êm dịu */
+  --sage-100: #E4ECE6;
+  --sage-200: #C9D9CE;
+  --sage-300: #A8C2B0;
+  --sage-400: #81A68E;
+  --sage-500: #5F8B6F;          /* Xanh xô thơm tự nhiên */
+  --sage-600: #4B735A;          /* Xanh xô thơm đậm - Nút bấm / Điểm nhấn */
+  --sage-700: #3D5C49;
+  --sage-800: #334B3C;
+  --sage-900: #2A3C31;
+
+  --accent-sage: var(--sage-600);
+}
+

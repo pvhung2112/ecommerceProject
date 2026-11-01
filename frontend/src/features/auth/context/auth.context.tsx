@@ -13,13 +13,15 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = (props: AuthProviderProps) => {
     const [user,setUser] = useState();
+
     const login = (userData : any)=>{
         setUser(userData);
     }
+    console.log(user);
+    
     useEffect(() => {
         api.get("/profiles/me")
             .then((res) => {
-                console.log(res);
                 setUser(res.data.data);
             })
             .catch(() => {  

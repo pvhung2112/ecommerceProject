@@ -2,15 +2,18 @@ export class productEntity {
     private readonly id: string;
     private name: string;
     private price: number;
-    private readonly userId: string;
+    private originalPrice?: number;
+
+    private readonly userId: string; 
+    private categoryId?: string;
 
     private description?: string;
     private thumbnail?: string;
-    private images: string[] = [];
-    private originalPrice?: number;
-    private stock: number = 0;
+    private images?: string[];
+    
+    private stock: number;
     private status: string = "active";
-    private categoryId?: string;
+   
 
     constructor(
         id: string,
@@ -57,7 +60,7 @@ export class productEntity {
     getThumbnail(): string | undefined {
         return this.thumbnail;
     }
-    getImages(): string[] {
+    getImages(): string[] | undefined {
         return this.images;
     }
     getOriginalPrice(): number | undefined {

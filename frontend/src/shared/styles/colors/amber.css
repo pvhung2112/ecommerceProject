@@ -1,0 +1,29 @@
+/* ==========================================================================
+   TÔNG VÀNG HỔ PHÁCH & CAM (AMBER & ORANGE - Cảnh báo, Đánh giá 5 sao, Xu)
+   ========================================================================== */
+:root {
+  --amber-50:  #FFFBEB;         /* Nền thông báo cảnh báo nhẹ */
+  --amber-100: #FEF3C7;
+  --amber-200: #FDE68A;
+  --amber-300: #FCD34D;
+  --amber-400: #FBBF24;         /* Vàng rực rỡ */
+  --amber-500: #F59E0B;         /* Vàng hổ phách chuẩn (Sao đánh giá) */
+  --amber-600: #D97706;
+  --amber-700: #B45309;
+  --amber-800: #92400E;
+  --amber-900: #78350F;
+
+  /* Tông Cam tươi (Orange - Shopee Flash Sale) */
+  --orange-50:  #FFF7ED;
+  --orange-100: #FFEDD5;
+  --orange-500: #F97316;
+  --orange-600: #EA580C;
+
+  /* Biến ngữ cảnh (Semantic) */
+  --warning:       var(--amber-500);
+  --warning-bg:    var(--amber-50);
+  --warning-text:  var(--amber-800);
+  --star-rating:   var(--amber-400);  /* Màu sao đánh giá ⭐ */
+  --coin-reward:   var(--amber-500);  /* Xu tích lũy, điểm thưởng */
+}
+

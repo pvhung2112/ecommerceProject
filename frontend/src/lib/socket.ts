@@ -4,7 +4,8 @@ import { appConfig } from "../configs/app.config";
 const SOCKET_URL = appConfig.apiBackend;
 
 const socket = io(SOCKET_URL, {
-    withCredentials: true
+    withCredentials: true,
+    autoConnect: false
 });
 
 

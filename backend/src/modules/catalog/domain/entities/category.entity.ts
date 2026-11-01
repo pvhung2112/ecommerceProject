@@ -3,17 +3,10 @@ export class categoryEntity {
     private title: string;
     private description?: string;
     private thumbnail?: string;
-    private parentId?: string;
+    private parentId?: string; //id của thg category cha
     private status: string = "active";
 
-    constructor(
-        id: string,
-        title: string,
-        parentId?: string,
-        status: string = "active",
-        description?: string,
-        thumbnail?: string
-    ) {
+    constructor(id: string,title: string,parentId?: string,status: string = "active",description?: string,thumbnail?: string) {
         this.id = id;
         this.title = title;
         this.parentId = parentId;

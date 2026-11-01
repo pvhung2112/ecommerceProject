@@ -1,39 +1,57 @@
 import type React from "react";
 import { authApiService } from "../services/auth.service"; 
+import { useNavigate, Link } from "react-router-dom";
 
-function RegisterForm() {
+export function RegisterForm() {
+  const navigate = useNavigate();
+
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    console.log("Dữ liệu nhập vào:", data);
-    
-    try {
+
       const response = await authApiService.register({
         email: data.email as string,
         password: data.password as string,
-        fullName: (data.fullName as string) || "",
       });
 
-      console.log("Backend trả về thành công:", response);
-      alert("Đăng ký thành công!");
-    } catch (error: any) {
-      alert(error.response?.data?.message || "Đăng ký thất bại!");
-    }
+      console.log(response);
+      alert("Đăng ký thành công");
+      navigate("/login");
   };
 
   return (
-    <>
-      <form onSubmit={handleRegister}>
-        <input type="text" name="fullName" placeholder="Họ và tên" />
-        <input type="email" name="email" placeholder="Email" required />
-        <input type="password" name="password" placeholder="Mật khẩu" required />
-        <button type="submit">Đăng ký</button>
+    <div className="auth-form-box">
+      <h2 className="form-title">Đăng ký</h2>
+
+      <form onSubmit={handleRegister} className="form-content">
+        <input 
+          type="email" 
+          name="email" 
+          className="form-input" 
+          placeholder="Email" 
+          required 
+        />
+
+        <input 
+          type="password" 
+          name="password" 
+          className="form-input" 
+          placeholder="Mật khẩu" 
+          required 
+        />
+
+        <button type="submit" className="form-btn-submit">
+          ĐĂNG KÝ
+        </button>
       </form>
-    </>
+
+      <div className="form-footer">
+        <span>Đã có tài khoản? </span>
+        <Link to="/login" className="form-link">Đăng nhập</Link>
+      </div>
+    </div>
   );
 }
 
-export default RegisterForm;

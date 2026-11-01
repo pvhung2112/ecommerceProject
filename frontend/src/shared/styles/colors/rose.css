@@ -1,0 +1,21 @@
+/* ==========================================================================
+   TÔNG HỒNG ĐÀO & ROSE (ROSE & PINK - Trái tim yêu thích, Hot deal)
+   ========================================================================== */
+:root {
+  --rose-50:  #FFF1F2;
+  --rose-100: #FFE4E6;
+  --rose-200: #FECDD3;
+  --rose-300: #FDA4AF;
+  --rose-400: #FB7185;
+  --rose-500: #F43F5E;         /* Hồng đào rực rỡ */
+  --rose-600: #E11D48;
+  --rose-700: #BE123C;
+  --rose-800: #9F1239;
+  --rose-900: #881337;
+
+  /* Biến ngữ cảnh (Semantic) */
+  --heart-active:      var(--rose-500); /* Trái tim Wishlist yêu thích ❤️ */
+  --badge-trending:    var(--rose-600);
+  --badge-trending-bg: var(--rose-50);
+}
+
