@@ -1,7 +1,7 @@
 
 import { Outlet } from "react-router-dom";
 
-function DashboardLayout(){
+export function DashboardLayout(){
     return(
         <>  
        
@@ -12,4 +12,3 @@ function DashboardLayout(){
         </>
     )
 }
-export default DashboardLayout;

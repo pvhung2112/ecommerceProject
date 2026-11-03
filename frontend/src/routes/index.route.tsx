@@ -7,10 +7,9 @@ const router = createBrowserRouter([
     ...AdminLogin
 ]);
 
-function RouterApp() {
+export function RouterApp() {
     return (
         <RouterProvider router={router} />
     );
 }
 
-export default RouterApp;

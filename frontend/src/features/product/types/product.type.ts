@@ -7,7 +7,14 @@ export interface Product {
     id: string;
     name: string;
     price: number;
+    originalPrice?: number | null;
     slug?: string | null;
+    thumbnail?: string | null;
+    description?: string | null;
+    images?: string[];
+    stock?: number;
+    status?: string;
+    categoryId?: string | null;
     user: ProductUser;
 }
 
@@ -22,5 +29,12 @@ export interface ProductListProps {
 export interface ProductInput {
     name: string;
     price: number;
+    originalPrice?: number;
     userId?: string;
+    description?: string;
+    thumbnail?: string;
+    images?: string[];
+    stock?: number;
+    status?: string;
+    categoryId?: string;
 }

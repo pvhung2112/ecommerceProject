@@ -67,4 +67,4 @@ export function AuthLayout() {
     );
 }
 
-export default AuthLayout;
+

@@ -1,4 +1,3 @@
-
 import { Navigate, Outlet } from "react-router-dom";
 
 interface ProtectedRouteProps {
@@ -6,13 +5,13 @@ interface ProtectedRouteProps {
     redirectPath?: string;
 }
 
-export default function ProtectedRoute({ allowedRoles = [], redirectPath = "/login"}: ProtectedRouteProps) {
+export function ProtectedRoute({ allowedRoles = [], redirectPath = "/login" }: ProtectedRouteProps) {
     const isAuthenticated = true;
     const userRole = "Cellers";
 
     if (!isAuthenticated) {
         console.warn(`Redirecting to ${redirectPath}`);
-        return <Navigate to={redirectPath} replace />
+        return <Navigate to={redirectPath} replace />;
     }
 
     // if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
@@ -22,3 +21,5 @@ export default function ProtectedRoute({ allowedRoles = [], redirectPath = "/log
 
     return <Outlet />;
 }
+
+

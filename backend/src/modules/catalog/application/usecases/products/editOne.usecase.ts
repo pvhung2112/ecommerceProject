@@ -11,14 +11,29 @@ export class editOneproductusecase {
             throw new Error("Không tìm thấy sản phẩm để sửa!");
         }
         const product = item.product;
-        product.setName(input.name);
-        product.setPrice(input.price);
+        if (input.name !== undefined) product.setName(input.name);
+        if (input.price !== undefined) product.setPrice(input.price);
+        if (input.description !== undefined) product.setDescription(input.description);
+        if (input.thumbnail !== undefined) product.setThumbnail(input.thumbnail);
+        if (input.images !== undefined) product.setImages(input.images);
+        if (input.originalPrice !== undefined) product.setOriginalPrice(input.originalPrice);
+        if (input.stock !== undefined) product.setStock(input.stock);
+        if (input.status !== undefined) product.setStatus(input.status);
+        if (input.categoryId !== undefined) product.setCategoryId(input.categoryId);
+
         const updatedProduct = await this.iProductRepository.editOne(product);
         return {
             id: updatedProduct.product.getId(),
             name: updatedProduct.product.getName(),
             price: updatedProduct.product.getPrice(),
-            slug: updatedProduct.slug,
+            originalPrice: updatedProduct.product.getOriginalPrice() ?? null,
+            slug: updatedProduct.slug ?? null,
+            description: updatedProduct.product.getDescription() ?? null,
+            thumbnail: updatedProduct.product.getThumbnail() ?? null,
+            images: updatedProduct.product.getImages() ?? [],
+            stock: updatedProduct.product.getStock(),
+            status: updatedProduct.product.getStatus(),
+            categoryId: updatedProduct.product.getCategoryId() ?? null,
             user: {
                 id: updatedProduct.user.id,
                 name: updatedProduct.user.name,

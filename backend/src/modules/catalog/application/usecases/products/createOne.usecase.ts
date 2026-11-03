@@ -10,14 +10,33 @@ export class createOneproductusecase {
         if (!input.userId) {
             throw new Error("Không tìm thấy thông tin người dùng (userId)!");
         }
-        const newProduct = new productEntity("", input.name, input.price, input.userId);
+        const newProduct = new productEntity(
+            "",
+            input.name,
+            input.price,
+            input.userId,
+            input.description,
+            input.thumbnail,
+            input.images,
+            input.originalPrice,
+            input.stock,
+            input.status,
+            input.categoryId
+        );
         const created = await this.iProductRepository.createOne(newProduct);
 
         return {
             id: created.product.getId(),
             name: created.product.getName(),
             price: created.product.getPrice(),
-            slug: created.slug,
+            originalPrice: created.product.getOriginalPrice() ?? null,
+            slug: created.slug ?? null,
+            description: created.product.getDescription() ?? null,
+            thumbnail: created.product.getThumbnail() ?? null,
+            images: created.product.getImages() ?? [],
+            stock: created.product.getStock(),
+            status: created.product.getStatus(),
+            categoryId: created.product.getCategoryId() ?? null,
             user: {
                 id: created.user.id,
                 name: created.user.name,

@@ -1,3 +1,5 @@
+import "./styles/productCard.css";
+
 export * from "./components/productCard";
 export * from "./components/productList";
 export * from "./routes/product.route";

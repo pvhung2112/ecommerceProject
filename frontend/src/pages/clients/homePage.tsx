@@ -4,8 +4,7 @@ import { productService, ProductList, type Product } from "../../features/produc
 function HomePage() {
     const [products, setProducts] = useState<Product[]>([]);
 
-    const fetchProducts = async () => {
-        const res = await productService.getAll();
+    const fetchProducts = async () => {        const res = await productService.getAll();
         setProducts(res.data);
         console.log(res.data);
     };
@@ -26,10 +25,11 @@ function HomePage() {
 //     };
 // }, []);
     return (
-    <>
-     <ProductList products={products} />
-    </>
-              
+        <main className="home-main">
+            <div className="container">
+                <ProductList products={products} />
+            </div>
+        </main>
     );
 }
 

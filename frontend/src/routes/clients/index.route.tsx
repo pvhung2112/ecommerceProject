@@ -1,9 +1,9 @@
 import CellersPage from "../../pages/clients/cellers/cellersPage";
 import HomePage from "../../pages/clients/homePage";
 import RecruitmentPage from "../../pages/clients/jobs/recruitmentPage";
-import DashboardLayout from "../../shared/layouts/dashboardLayout";
-import MainLayout from "../../shared/layouts/mainLayout";
-import ProtectedRoute from "../protected.route";
+import {DashboardLayout} from "../../shared/layouts/dashboardLayout";
+import {MainLayout} from "../../shared/layouts/mainLayout";
+import {ProtectedRoute} from "../protected.route";
 import { clientProductRoutes, sellerProductRoutes } from "../../features/product";
 import { clientCategoryRoutes, sellerCategoryRoutes } from "../../features/category";
 import ChatPage from "../../pages/clients/chats/chatPage";

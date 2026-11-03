@@ -1,8 +1,8 @@
 import { Navigate, type RouteObject } from "react-router-dom";
 import { appConfig } from "../../configs/app.config";
 import { LoginPage } from "../../pages/admin/auth/login";
-import DashboardLayout from "../../shared/layouts/dashboardLayout";
-import ProtectedRoute from "../protected.route";
+import {DashboardLayout} from "../../shared/layouts/dashboardLayout";
+import {ProtectedRoute} from "../protected.route";
 import DashboardPage from "../../pages/admin/dashboardPage";
 import { adminProductRoutes } from "../../features/product";
 import { adminCategoryRoutes } from "../../features/category";

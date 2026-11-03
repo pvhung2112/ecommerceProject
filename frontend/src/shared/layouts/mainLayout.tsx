@@ -1,7 +1,8 @@
 import { Footer } from "../components/partials/footer";
 import { Header } from "../components/partials/header";
 import { Outlet } from "react-router-dom";
-function MainLayout() {
+
+export function MainLayout() {
     return (
         <>
             <Header />
@@ -12,4 +13,3 @@ function MainLayout() {
         </>
     )
 }
-export default MainLayout;

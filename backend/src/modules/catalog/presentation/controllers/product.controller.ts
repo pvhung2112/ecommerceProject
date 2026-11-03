@@ -20,11 +20,18 @@ export class productController {
     };
 
     createOne = async (req: Request, res: Response) => {
-        const { name, price, userId } = req.body;
+        const { name, price, userId, description, thumbnail, images, originalPrice, stock, status, categoryId } = req.body;
         const input: productInputDto = {
             name,
             price,
-            userId
+            userId,
+            description,
+            thumbnail,
+            images,
+            originalPrice,
+            stock,
+            status,
+            categoryId
         };
         const output = await this.dependencies.product.createOneProductUsecase.execute(input);
         res.status(201).json(output);
@@ -32,10 +39,17 @@ export class productController {
 
     editOne = async (req: Request, res: Response) => {
         const id = req.params.id as string;
-        const { name, price } = req.body;
+        const { name, price, description, thumbnail, images, originalPrice, stock, status, categoryId } = req.body;
         const input: productInputDto = {
             name,
-            price
+            price,
+            description,
+            thumbnail,
+            images,
+            originalPrice,
+            stock,
+            status,
+            categoryId
         };
         const output = await this.dependencies.product.editOneProductUsecase.execute(input, id);
         res.status(200).json({
