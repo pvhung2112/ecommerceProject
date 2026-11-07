@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import type { ProductCardProps } from "../types/product.type";
+import { productPaths } from "../routes/product.paths";
 
 const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=600&q=80";
 
 export function ProductCard({ data }: ProductCardProps) {
-    const detailUrl = data.slug ? `/products/${data.slug}` : `/products/${data.id}`;
+    const detailUrl = productPaths.detail.url(data.slug, data.id);
 
     return (
         <div className="product-card">
