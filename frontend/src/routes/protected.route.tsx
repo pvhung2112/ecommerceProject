@@ -7,17 +7,17 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ allowedRoles = [], redirectPath = "/login" }: ProtectedRouteProps) {
     const isAuthenticated = true;
-    const userRole = "Cellers";
+    const userRole = "CUSTOMER";
 
     if (!isAuthenticated) {
         console.warn(`Redirecting to ${redirectPath}`);
         return <Navigate to={redirectPath} replace />;
     }
 
-    // if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
-    //     console.warn(`User role ${userRole} not allowed`);
-    //     return <Navigate to={redirectPath} replace />
-    // }
+    if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
+        console.warn(`User role ${userRole} not allowed`);
+        return <Navigate to={redirectPath} replace />;
+    }
 
     return <Outlet />;
 }

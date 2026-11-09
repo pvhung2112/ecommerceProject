@@ -22,7 +22,9 @@ export function LoginForm() {
         password: data.password as string,
       });
 
+      if (auth) {
         auth.login(response.data);
+      }
       alert("Đăng nhập thành công!");
 
       navigate(isSeller ? "/cellers" : "/");

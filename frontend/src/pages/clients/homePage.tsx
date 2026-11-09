@@ -4,7 +4,8 @@ import { productService, ProductList, type Product } from "../../features/produc
 function HomePage() {
     const [products, setProducts] = useState<Product[]>([]);
 
-    const fetchProducts = async () => {        const res = await productService.getAll();
+    const fetchProducts = async () => {       
+        const res = await productService.getAll();
         setProducts(res.data);
         console.log(res.data);
     };

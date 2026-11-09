@@ -6,7 +6,7 @@ import {MainLayout} from "../../shared/layouts/mainLayout";
 import {ProtectedRoute} from "../protected.route";
 import { clientProductRoutes, sellerProductRoutes } from "../../features/product";
 import { clientCategoryRoutes, sellerCategoryRoutes } from "../../features/category";
-import ChatPage from "../../pages/clients/chats/chatPage";
+import {ChatPage} from "../../pages/clients/chats/chatPage";
 import { AuthLayout } from "../../shared/layouts/authLayout";
 import { LoginPage } from "../../pages/clients/auth/login";
 import { RegisterPage } from "../../pages/clients/auth/register";

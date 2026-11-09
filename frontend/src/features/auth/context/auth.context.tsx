@@ -12,7 +12,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 
 export const AuthProvider = (props: AuthProviderProps) => {
-    const [user,setUser] = useState();
+    const [user, setUser] = useState<any>(null);
 
     const login = (userData : any)=>{
         setUser(userData);

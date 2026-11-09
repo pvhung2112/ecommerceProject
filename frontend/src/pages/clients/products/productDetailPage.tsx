@@ -6,9 +6,10 @@ export function ProductDetailPage() {
     const { id } = useParams<{ id: string }>();
 const [product, setProduct] = useState<Product>();
     const fetchProductDetail = async () => {
-            const data = await productService.getDetail(id);
-            setProduct(data);
-        };
+        if (!id) return;
+        const data = await productService.getDetail(id);
+        setProduct(data);
+    };
     useEffect(() => {
         fetchProductDetail();
     }, [id]);

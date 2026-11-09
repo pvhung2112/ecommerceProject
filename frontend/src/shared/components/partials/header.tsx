@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { SearchBar } from "../search/searchBar";
 import { NavLink } from "react-router-dom";
-import { Bell, MessageSquare, ShoppingCart } from "lucide-react";
+import { Bell, ShoppingCart } from "lucide-react";
 import "../../styles/partials/header.css";
 import { useAuth } from "../../../features/auth";
+import { ChatDropdownList } from "../../../features/chats";
 
 export function Header() {
     const auth = useAuth();
     const user = auth?.user;
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     return (
-        <header className="header">
+        <header className="header" >
             <div className="header-topbar">
                 <div className="container">
                     <div className="topbar-left">
@@ -23,10 +26,14 @@ export function Header() {
                             <span>Thông Báo</span>
                         </span>
                         {user && (
-                            <NavLink to="/chat" className="topbar-chat" title="Tin nhắn / Chat">
-                                <MessageSquare size={14} />
-                                <span>Chat</span>
-                            </NavLink>
+                            <div className="header-chat-wrapper" style={{position : "relative"}}>
+                                <span onClick={()=>{
+                                    setIsChatOpen(pre => !pre)              
+                                }}>chat</span>
+                                {isChatOpen && (
+                                    <ChatDropdownList/>
+                                )}
+                            </div>
                         )}
                         <div className="header-account">
                             {user ? (
