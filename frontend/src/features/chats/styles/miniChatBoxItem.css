@@ -1,0 +1,112 @@
+.mini-chat-box {
+    width: 320px;
+    height: 400px;
+    background: #ffffff;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e5e7eb;
+}
+
+.mini-chat-box .mini-chat-box-header {
+    background-color: #1E4E8C;
+    color: #ffffff;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mini-chat-box .mini-chat-box-header .mini-chat-box-partner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mini-chat-box .mini-chat-box-header .mini-chat-box-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.mini-chat-box .mini-chat-box-header .mini-chat-box-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.mini-chat-box .mini-chat-box-header .mini-chat-box-close {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.mini-chat-box .mini-chat-box-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #f9fafb;
+}
+
+.mini-chat-box .mini-chat-box-body .mini-chat-box-empty {
+    font-size: 12px;
+    color: #888888;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mini-chat-box .mini-chat-box-body .mini-chat-box-msg {
+    max-width: 75%;
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 13px;
+    word-break: break-word;
+}
+
+.mini-chat-box .mini-chat-box-body .mini-chat-box-msg.sent {
+    align-self: flex-end;
+    background: #0084ff;
+    color: #ffffff;
+}
+
+.mini-chat-box .mini-chat-box-body .mini-chat-box-msg.received {
+    align-self: flex-start;
+    background: #e4e6eb;
+    color: #050505;
+}
+
+.mini-chat-box .mini-chat-box-footer {
+    padding: 8px 10px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    gap: 8px;
+    background: #ffffff;
+}
+
+.mini-chat-box .mini-chat-box-footer .mini-chat-box-input {
+    flex: 1;
+    border: 1px solid #d1d5db;
+    border-radius: 18px;
+    padding: 6px 12px;
+    font-size: 13px;
+    outline: none;
+}
+
+.mini-chat-box .mini-chat-box-footer .mini-chat-box-btn {
+    background: #0084ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+

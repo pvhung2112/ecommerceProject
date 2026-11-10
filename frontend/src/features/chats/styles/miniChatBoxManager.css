@@ -1,0 +1,10 @@
+.mini-chat-manager {
+    position: fixed;
+    bottom: 1px;
+    right: 15px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 12px;
+    z-index: 999;
+}
+

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { chatAPiService } from "../services/chat.service";
-import { useAuth } from "../../auth";
+import { chatAPiService } from "../../services/chat.service";
+import { useAuth } from "../../../auth";
 import { ChatDropdownItem } from "./chatDropdownItem";
-import "../styles/chatDropdown.css"; 
+import "../../styles/chatDropdown.css"; 
+import { useChat } from "../../hooks/useChat";
 export function  ChatDropdownList() {
+    const {openChat} = useChat();
     const [conversations, setConversations] = useState([]);
     const auth = useAuth();
     const userId = auth.user.userId;
@@ -26,9 +28,7 @@ export function  ChatDropdownList() {
                 {conversations.map((conversation) => {
                     return (
                         <ChatDropdownItem key={conversation.id} conversation={conversation} userId={userId} 
-                            onSelect={() => {
-                                console.log("Đã chọn:", conversation);
-                            }}
+                            onSelect={() => {openChat(conversation.id);}}
                         />
                     )
                 })}
