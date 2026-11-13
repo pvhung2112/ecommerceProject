@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { productService, ProductList, type Product } from "../../features/product";
 // import socket from "../../lib/socket";
-function HomePage() {
+export function HomePage() {
     const [products, setProducts] = useState<Product[]>([]);
 
     const fetchProducts = async () => {       
@@ -34,4 +34,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+

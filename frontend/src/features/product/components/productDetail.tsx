@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { 
     ShoppingCart, 
     Minus, 
@@ -9,12 +9,22 @@ import {
     ChevronRight,
 } from "lucide-react";
 import type { Product } from "../types/product.type";
+import { useChat, chatAPiService } from "../../chats";
+import { useAuth } from "../../auth";
 import "../styles/productDetail.css";
 
 const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=600&q=80";
 
 export function ProductDetail(props : {product : Product}) {
     const product = props.product;
+    const chat = useChat();
+    const auth = useAuth();
+    const userId = auth?.user?.userId;
+
+    const handleChat = async () => {
+        const res = await chatAPiService.createConversation(product.user.id);
+        chat?.openChat(res.data.id);
+    };
     const galleryImages = (product.images && product.images.length > 0)
         ? product.images
         : [
@@ -100,10 +110,12 @@ export function ProductDetail(props : {product : Product}) {
                         </div>
 
                         <div className="seller-actions">
-                            <button type="button" className="btn-seller-chat">
-                                <MessageSquare size={15} />
-                                <span>Chat Ngay</span>
-                            </button>
+                            {product.user?.id !== userId && (
+                                <button type="button" className="btn-seller-chat" onClick={handleChat}>
+                                    <MessageSquare size={15} />
+                                    <span>Chat Ngay</span>
+                                </button>
+                            )}
                             <button type="button" className="btn-seller-shop" style={{display: "flex", alignItems: "center",gap:"10px"}}>
                                 <Store size={15} />
                                 <span>Xem Shop</span>

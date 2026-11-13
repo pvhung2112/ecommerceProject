@@ -1,5 +1,5 @@
 import CellersPage from "../../pages/clients/cellers/cellersPage";
-import HomePage from "../../pages/clients/homePage";
+import {HomePage} from "../../pages/clients/homePage";
 import RecruitmentPage from "../../pages/clients/jobs/recruitmentPage";
 import {DashboardLayout} from "../../shared/layouts/dashboardLayout";
 import {MainLayout} from "../../shared/layouts/mainLayout";

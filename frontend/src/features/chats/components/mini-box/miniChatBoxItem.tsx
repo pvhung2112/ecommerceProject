@@ -33,11 +33,26 @@ export function MiniChatBox({ conversationId, closeChat }: MiniChatBoxProps) {
         console.log(messages);
     }, [conversationId]);
 
-
+    useEffect(()=>{
+        if (!socket.connected) {
+            socket.connect();
+        }
+        socket.emit("chat:join-conversation", conversationId);
+        const handleReceiveMessage = (message)=>{
+           setMessages((prev) => [...prev, message]);
+           console.log("message",message);
+        }
+        socket.on("chat:receive-Message",handleReceiveMessage);
+        return () => {
+            socket.emit("chat:leave-conversation", conversationId);
+            socket.off("chat:receive-Message", handleReceiveMessage);
+        }
+    },[conversationId])
     const partner = conversation?.users?.find((u: any) => u.id !== userId);
     
     const handleSend = async (content: string) => {
         const res = await chatAPiService.sendMessage(content, conversationId);
+        console.log(res.data);
         setMessages((prev) => [...prev, res.data]);
     };
 

@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { JWT_CONFIG } from "../../../config/jwt.config";
 export class jwtService {
+    // jwt có 3 phần header, payload , sign
     static signAcessToken(payload: any): string {
         return jwt.sign(payload, JWT_CONFIG.ACCESS.SECRET as string, {
             expiresIn: JWT_CONFIG.ACCESS.EXPIRATION

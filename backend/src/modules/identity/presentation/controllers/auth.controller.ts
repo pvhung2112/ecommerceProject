@@ -8,7 +8,6 @@ export class authController {
     constructor(private dependencies: IIdentityModule) { }
 
     register = async (req: Request, res: Response): Promise<void> => {
-        try {
             const input: registerInputDto = {
                 email: req.body.email,
                 password: req.body.password,
@@ -20,15 +19,9 @@ export class authController {
                 message: "Đăng ký tài khoản thành công",
                 data: output
             });
-        } catch (error: any) {
-            res.status(400).json({
-                message: error.message || "Đăng ký tài khoản thất bại"
-            });
-        }
     };
 
     login = async (req: Request, res: Response): Promise<void> => {
-        try {
             const input: loginInputDto = {
                 email: req.body.email,
                 password: req.body.password,
@@ -36,7 +29,6 @@ export class authController {
 
             const output = await this.dependencies.auth.loginByEmailUsecase.execute(input);
 
-  
             if (output.token) {
                 res.cookie("accessToken", output.token.accessToken, {
                     httpOnly: true,
@@ -58,51 +50,55 @@ export class authController {
                 message: "Đăng nhập tài khoản thành công",
                 data: userData
             });
-        } catch (error: any) {
-            res.status(401).json({
-                message: error.message || "Đăng nhập tài khoản thất bại"
-            });
-        }
     };
 
     refreshToken = async (req: Request, res: Response): Promise<void> => {
-        try {
             const currentRefreshToken = req.cookies?.refreshToken;
             if (!currentRefreshToken) {
                 res.status(401).json({
-                    message: "Không tìm thấy Refresh Token, vui lòng đăng nhập lại!",
+                    message: "Không tìm thấy Refresh Token",
                     code: "REFRESH_TOKEN_NOT_FOUND"
                 });
                 return;
             }
 
-            const decoded = jwtService.verifyRefreshToken(currentRefreshToken);
-            const newAccesstoken = jwtService.signAcessToken({
-                userId: decoded.userId,
-                email: decoded.email,
-                roleId: decoded.roleId
-            });
+            try {
+                const decoded = jwtService.verifyRefreshToken(currentRefreshToken);
+                const payload = {
+                    userId: decoded.userId,
+                    email: decoded.email,
+                    roleId: decoded.roleId
+                };
+                const newAccesstoken = jwtService.signAcessToken(payload);
+                const newRefreshtoken = jwtService.signRefreshToken(payload);
+                res.cookie("accessToken", newAccesstoken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                    sameSite: "lax",
+                    maxAge: JWT_CONFIG.ACCESS.MAX_AGE_MS
+                });
 
-            res.cookie("accessToken", newAccesstoken, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-                sameSite: "lax",
-                maxAge: JWT_CONFIG.ACCESS.MAX_AGE_MS
-            });
-
-            res.status(200).json({
-                message: "Refresh token thành công",
-                data: {
-                    accessToken: newAccesstoken
-                }
-            });
-        } catch (error: any) {
-            res.clearCookie("accessToken");
-            res.clearCookie("refreshToken");
-            res.status(401).json({
-                message: "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!",
-                code: "REFRESH_TOKEN_EXPIRED"
-            });
-        }
+                res.cookie("refreshToken", newRefreshtoken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                    sameSite: "lax",
+                    maxAge: JWT_CONFIG.REFRESH.MAX_AGE_MS
+                });
+                
+                res.status(200).json({
+                    message: "Refresh token thành công",
+                    data: {
+                        accessToken: newAccesstoken
+                    }
+                });
+            } catch (error) {
+                res.clearCookie("accessToken");
+                res.clearCookie("refreshToken");
+                res.status(401).json({
+                    message: "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại",
+                    code: "REFRESH_TOKEN_EXPIRED"
+                });
+            }
+            
     };
 }

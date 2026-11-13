@@ -8,12 +8,16 @@ export const socketAuthMiddleware = (socket : Socket, next : (err?: Error) => vo
     console.log(cookieHeader);
     const accessToken = cookieHeader?.split("; ").find((cookie)=>cookie.startsWith("accessToken"))?.split("=")[1];
     if (!accessToken) {
-        return next(new Error("ch đăng nhập"));
+        return next(new Error("chưa đăng nhập"));
     }
-    const decodeAccessToken = jwtService.verifyAccessToken(accessToken);
-    socket.data.user = decodeAccessToken;
-    socket.data.userId = decodeAccessToken.userId;
-    console.log(decodeAccessToken);
-    console.log(accessToken);
+    try {
+        const decodeAccessToken = jwtService.verifyAccessToken(accessToken);
+        socket.data.user = decodeAccessToken;
+        socket.data.userId = decodeAccessToken.userId;
+        console.log(decodeAccessToken);
+        console.log(accessToken);
+    } catch (error : any) { 
+        return next(new Error(error.name === "TokenExpiredError" ? "TOKEN_EXPIRED" : "INVALID_TOKEN"));
+    }
     next();
 }

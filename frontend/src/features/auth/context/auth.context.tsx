@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
-import api from "../../../lib/axios"; 
+import {api} from "../../../lib/axios"; 
 export interface AuthProviderProps {
     children: ReactNode;
 }
