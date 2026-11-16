@@ -39,8 +39,12 @@ export function MiniChatBox({ conversationId, closeChat }: MiniChatBoxProps) {
         }
         socket.emit("chat:join-conversation", conversationId);
         const handleReceiveMessage = (message)=>{
-           setMessages((prev) => [...prev, message]);
-           console.log("message",message);
+            if (message.conversationId !== conversationId) return;
+            setMessages((prev) => {
+                if(prev.some((m)=>m.id===message.id)) return prev;
+                return [...prev, message]
+            });
+            console.log("message",message);
         }
         socket.on("chat:receive-Message",handleReceiveMessage);
         return () => {
@@ -53,7 +57,10 @@ export function MiniChatBox({ conversationId, closeChat }: MiniChatBoxProps) {
     const handleSend = async (content: string) => {
         const res = await chatAPiService.sendMessage(content, conversationId);
         console.log(res.data);
-        setMessages((prev) => [...prev, res.data]);
+        setMessages((prev) => {
+            if(prev.some((m)=>m.id===res.data.id)) return prev;
+            return [...prev, res.data]
+        });
     };
 
     return (

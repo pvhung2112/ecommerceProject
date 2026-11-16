@@ -37,6 +37,7 @@ model User {
   conversations Conversation[] //1 user - n conversation
 
   messages Message[] // 1 user - n message 
+  cart     Cart?     // 1 user - 1 cart
 }
 model Conversation{
   id String @id @default(uuid())
@@ -119,6 +120,8 @@ category   Category? @relation(fields: [categoryId], references: [id], onDelete:
   deleted   Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  cartItems CartItem[] // 1 product - n cartItems
 }
 
 model Category {
@@ -140,3 +143,26 @@ model Category {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([cartId, productId])
+}
+

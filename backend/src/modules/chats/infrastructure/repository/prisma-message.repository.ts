@@ -32,7 +32,7 @@ export class messageRepository implements IMessageRepository {
             }
         })
         return {
-            massage: messageMapper.toDomain(saveMessage),
+            message: messageMapper.toDomain(saveMessage),
             sender: {
                 id: saveMessage.sender.id,
                 name: saveMessage.sender.profile?.fullName || `user${saveMessage.sender.id}`
@@ -70,7 +70,7 @@ export class messageRepository implements IMessageRepository {
         })
         return getMessages.map((message) => {
             return {
-                massage: messageMapper.toDomain(message),
+                message: messageMapper.toDomain(message),
                 sender: {
                     id: message.sender.id,
                     name: message.sender.profile?.fullName || `user${message.sender.id}`
