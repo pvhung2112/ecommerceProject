@@ -11,25 +11,74 @@ datasource db {
   provider = "postgresql"
 }
 
+//vd : role cellers, admin ,vv
+//1 role thì sẽ có nhiều user ví dụ như celler thì sẽ có nhiều người
+//1 role thì sẽ có nhiều permission ví dụ như là role cellers thì sẽ có các quyền là "product:create, product:update, product:delete,..."
+//nếu muốn thêm 
 model Role {
-  id          String   @id @default(uuid())
-  name        String   @unique
+  id String @id @default(uuid())
+  name String @unique
   description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 
-  users User[] // 1 role - n user
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roleUsers RoleUser[] // n role - n user
+  rolePermissions RolePermission[] // n role - n permission
 }
 
-model User {
-  id     String @id @default(uuid())
-  email  String? @unique
-  status String @default("active")
+//vd : quyền "product:create,product:delete",...
+//1 permission thì sẽ có nhiều role ví dụ như celler có quyền tạo sản phẩm hay admin cũng có quyền tạo sản phẩm
+model Permission{
+  id String @id @default(uuid())
+  name String @unique
+  description String?
+
+  rolePermissions RolePermission[] // n permission - n role
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RolePermission{
+  roleId String
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  permissionId String
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RoleUser{
+  userId String
+  user User @relation(fields : [userId], references: [id], onDelete: Cascade)
 
   roleId String
-  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  role Role @relation(fields : [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+
+  assignedAt DateTime @default(now())
+  assignedBy String?
+
+  status String @default("active")
+
+}
+
+//1 user thì có n role 
+model User {
+  id String @id @default(uuid())
+  email String? @unique
+  status String @default("active")
+
+  roleUsers RoleUser[] // n user - n role
 
   profile Profile? //1user- 1 profile
+
   account Account[] //1user - n account
 
   products Product[] //1user - n product
@@ -37,20 +86,22 @@ model User {
   conversations Conversation[] //1 user - n conversation
 
   messages Message[] // 1 user - n message 
-  cart     Cart?     // 1 user - 1 cart
+
+  cart Cart? // 1 user - 1 cart
 }
+
 model Conversation{
   id String @id @default(uuid())
   name String?
-  isGroup     Boolean   @default(false)
+  isGroup Boolean @default(false)
 
   users User[] // 1 conversation - n user 
   messages Message[] // 1 conversation - n message
   
   lastMessage String?
+
   updatedAt DateTime  @updatedAt 
   createdAt DateTime  @default(now())
-
 }
 model Message{
   id String @id @default(uuid())  
@@ -67,14 +118,14 @@ model Message{
 }
 
 model Account {
-  id                String  @id @default(uuid())
-  provider          String
+  id String @id @default(uuid())
+  provider String
   providerAccountId String?
 
   password String?
 
   userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -83,41 +134,41 @@ model Profile {
   id String @id @default(uuid())
 
   fullName String
-  phone    String?
-  address  String?
-  gender   String?
+  phone String?
+  address String?
+  gender String?
   birthday DateTime?
-  bio      String?
+  bio String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Product {
-  id   String  @id @default(uuid())
+  id String  @id @default(uuid())
   name String
-  slug String? @unique
+  slug String?
 
   description String?
   thumbnail String?
-  images    String[] @default([])
+  images String[] @default([])
 
-  price         Decimal
+  price Decimal
   originalPrice Decimal?
-  stock         Int      @default(0)
+  stock Int @default(0)
 
   status String @default("active")
 
   userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   categoryId String?
-category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
 
-  deleted   Boolean  @default(false)
+  deleted Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -125,41 +176,41 @@ category   Category? @relation(fields: [categoryId], references: [id], onDelete:
 }
 
 model Category {
-  id          String  @id @default(uuid())
-  title       String
-  slug        String? @unique
+  id String @id @default(uuid())
+  title String
+  slug String? @unique
   description String?
-  thumbnail   String?
+  thumbnail String?
 
   parentId String?
-  parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  parent Category? @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
   children Category[] @relation("CategoryHierarchy")
 
   products Product[] //tạm 1 category - n product
-  status   String    @default("active")
+  status String @default("active")
 
-  deleted   Boolean   @default(false)
+  deleted Boolean @default(false)
   deletedAt DateTime?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Cart {
-  id        String     @id @default(uuid())
-  userId    String     @unique
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items     CartItem[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id String @id @default(uuid())
+  userId String @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items CartItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model CartItem {
-  id        String   @id @default(uuid())
-  cartId    String
-  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  id String @id @default(uuid())
+  cartId String
+  cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
   productId String
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  quantity  Int      @default(1)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity Int @default(1)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
